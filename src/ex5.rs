@@ -21,11 +21,15 @@ impl Thing {                                                 /*
     // ^~~~~~~~~~~~~ no `self` parameter means that the method
     //               is associated with the *type*, rather than
     //               with particular instances.
-    //               (Often calls a "static" method, though there
+    //               (Often calls a "static" method, though the syntax
+    //                here does not use that keyword)
 }
 
 // EXERCISE:
-// add a 
+// add a `new` method for consructing of a `Thing`
+
+// EXERCISE:
+// port earlier `increment_count` from ex4 to an instance method on `Thing`
 
 fn main() {
 
