@@ -18,4 +18,5 @@ pub fn main() {
     run!(ex4);
     run!(ex5);
     run!(ex6);
+    run!(ex7);
 }
