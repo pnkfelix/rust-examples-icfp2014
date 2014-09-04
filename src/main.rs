@@ -1,12 +1,21 @@
+#![feature(macro_rules)]
+
 extern crate "fsk-examples" as fsk;
 
-fn main() {
-    println!("fsk::ex1");
-    fsk::ex1::main();
-    println!("\nfsk::ex2");
-    fsk::ex2::main();
-    println!("\nfsk::ex3");
-    fsk::ex3::main();
-    println!("\nfsk::ex4");
-    fsk::ex4::main();
+macro_rules! run {
+    ($i:ident) => {
+        {
+            println!("fsk::{}", stringify!($i));
+            fsk::$i::main();
+        }
+    }
+}
+
+pub fn main() {
+    run!(ex1);
+    run!(ex2);
+    run!(ex3);
+    run!(ex4);
+    run!(ex5);
+    run!(ex6);
 }
