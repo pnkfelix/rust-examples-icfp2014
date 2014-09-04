@@ -31,6 +31,6 @@ impl Thing {                                                 /*
 // EXERCISE:
 // port earlier `increment_count` from ex4 to an instance method on `Thing`
 
-fn main() {
+pub fn main() {
 
 }
