@@ -1,3 +1,5 @@
+// Example 6: Taste of concurrency.
+
 struct Thing {
     label: String,
     count: int
