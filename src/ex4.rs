@@ -13,7 +13,13 @@ fn print_thing_val(x: Thing) {
 fn print_thing_ref(x: &Thing) {
     //                ^~ this is a "reference type constructor"
     //                   `&T` is pronounced "(shared) reference to T"
-    println!("the count of {:c} is {:d}", x.label, x.count);
+    println!("the count of `{:c}` is {:d}", x.label, x.count);
+
+    let Thing { label, count } = *x;
+    println!("another way to bind (`{:c}` still {:d})", label, count);
+
+    let &Thing { label, count } = x;
+    println!("even &pat is a pattern (and `{:c}` still {:d})", label, count);
 }
 
 fn print_thing_box(x: Box<Thing>) {
