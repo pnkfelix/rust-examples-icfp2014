@@ -1,0 +1,5 @@
+[package]
+
+name = "fsk-examples"
+version = "0.0.1"
+authors = ["Felix S. Klock II <pnkfelix@pnkfx.org>"]
