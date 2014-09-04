@@ -1,16 +1,16 @@
 struct Thing {
-    label: char,
+    label: String,
     count: int
 }
 
 impl Thing {
     fn new(c: char) -> Thing {
-        Thing { label: c, count: 0 }
+        Thing { label: String::from_char(1, c), count: 0 }
     }
 }
 
 pub fn main() {
-    let t = Thing::new('a');
+    let mut t = Thing::new('a');
 
     // A channel is for message passing between tasks
     let (tx, rx) = channel();
@@ -26,3 +26,11 @@ pub fn main() {
     let c = rx.recv();
     println!("received a message from {}", c);
 }
+
+// EXERCISE: Add code that modifies `t` in the spawned task.  Add
+// instrumentation to inspect that state in the original task; Did the
+// original get modified by the spawned task?
+
+// EXERCISE: The definition of `Thing` above uses `String` for its label.
+// Change that back to `char` (and fix the code to accomodate the change).
+// Then repeat previous exercise.  Discuss.
