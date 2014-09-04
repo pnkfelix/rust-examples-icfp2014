@@ -1,7 +1,5 @@
 // Example 7: loops, fixed length arrays, and slices.
 
-use std::mem;
-
 pub fn main() {
     let some_nums : [i32, ..9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     //              ^             ^~~~~~~~~~~~~~~~~~~~~~~~~ an array literal
@@ -65,6 +63,8 @@ fn print_via_while(some_nums: &[i32]) {
 // Discuss.
 
 fn print_sizes() {
+    use std::mem;
+
     println!(" size_of::<&[i32, ..9]>() == {:2u} bytes", mem::size_of::<&[i32, ..9]>());
     println!("      size_of::<&[i32]>() == {:2u} bytes", mem::size_of::<&[i32]>());
 }
