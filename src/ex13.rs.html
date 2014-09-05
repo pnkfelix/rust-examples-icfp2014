@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>ex13.rs</title>
+<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<style type="text/css"><!-- 
+body { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default   { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default a { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+ --></style>
+
+    <script type="text/javascript"><!--
+  // this function is needed to work around
+  // a bug in IE related to element attributes
+  function hasClass(obj)
+  {
+      var result = false;
+      if (obj.getAttributeNode("class") != null)
+      {
+          result = obj.getAttributeNode("class").value;
+      }
+      return result;
+  }
+
+  function stripe(id)
+  {
+      // the flag we'll use to keep track of
+      // whether the current row is odd or even
+      var even = false;
+
+      // if arguments are provided to specify the colors
+      // of the even & odd rows, then use the them;
+      // otherwise use the following defaults:
+      var evenColor = arguments[1] ? arguments[1] : "#fff";
+      var oddColor  = arguments[2] ? arguments[2] : "#ddd";
+
+      // obtain a reference to the desired table
+      // if no such table exists, abort
+      var table = document.getElementById(id);
+      if (! table) { return; }
+
+      // by definition, tables can have more than one tbody
+      // element, so we'll have to get the list of child
+      // &lt;tbody&gt;s
+      var tbodies = table.getElementsByTagName("tbody");
+
+      // and iterate through them...
+      for (var h = 0; h < tbodies.length; h++)
+      {
+          // find all the &lt;tr&gt; elements...
+          var trs = tbodies[h].getElementsByTagName("tr");
+
+          // ... and iterate through them
+          for (var i = 0; i < trs.length; i++)
+          {
+              // avoid rows that have a class attribute
+              // or backgroundColor style
+              if (! hasClass(trs[i]) &&
+                  ! trs[i].style.backgroundColor)
+              {
+                  // get all the cells in this row...
+                  var tds = trs[i].getElementsByTagName("td");
+
+                  // and iterate through them...
+                  for (var j = 0; j < tds.length; j++)
+                  {
+                      var mytd = tds[j];
+
+                      // avoid cells that have a class attribute
+                      // or backgroundColor style
+                      if (! hasClass(mytd) &&
+                          ! mytd.style.backgroundColor)
+                      {
+                          mytd.style.backgroundColor =
+                            even ? evenColor : oddColor;
+                      }
+                  }
+              }
+              // flip from odd to even, or vice-versa
+              even =  ! even;
+          }
+      }
+  }
+
+  function toggle_invis( name )
+  {
+      var filter =
+        { acceptNode:
+          function( node )
+          { var classname = node.id;
+            if( classname )
+            { var classbase = classname.substr( 0, name.length );
+              if( classbase == name ) { return NodeFilter.FILTER_ACCEPT; } }
+            return NodeFilter.FILTER_SKIP; } };
+      var walker = document.createTreeWalker( document.body           ,
+                                              NodeFilter.SHOW_ELEMENT ,
+                                              filter                  ,
+                                              false                   );
+      while( walker.nextNode() )
+      {
+          var e = walker.currentNode;
+          if( e.style.display == "none" ) { e.style.display = "inline"; }
+          else                            { e.style.display = "none";   }
+      }
+  }
+--> </script>
+  </head>
+  <body onload="stripe('index'); return true;">
+
+<pre><span class="comment-delimiter">// </span><span class="comment">Exercise 13: A (toy) linked list.
+</span>
+<span class="keyword">extern</span> <span class="keyword">crate</span> arena;
+
+<span class="keyword">type</span> <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt; = &amp;'<span class="variable-name">a</span> <span class="type">arena::TypedArena</span>&lt;<span class="type">X</span>&gt;;
+
+<span class="keyword">pub</span> <span class="keyword">struct</span> <span class="type">HsNode</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
+    <span class="variable-name">arena</span>: <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;&gt;,
+    <span class="variable-name">value</span>: <span class="type">X</span>,
+    <span class="variable-name">next</span>: &amp;'<span class="variable-name">a</span> <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;,
+}
+
+<span class="keyword">pub</span> <span class="keyword">struct</span> <span class="type">HsLeaf</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
+    <span class="variable-name">arena</span>: <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;&gt;
+}
+
+<span class="keyword">pub</span> <span class="keyword">enum</span> <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
+    <span class="type">HsCons</span>(<span class="type">HsNode</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
+    <span class="type">HsNull</span>(<span class="type">HsLeaf</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
+}
+
+<span class="keyword">trait</span> <span class="type">StackMaker</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+    <span class="keyword">fn</span> <span class="function-name">make_null</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt;;
+    <span class="keyword">fn</span> <span class="function-name">make_cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">h</span>: <span class="type">X</span>, <span class="variable-name">t</span>: <span class="type">HS</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt;;
+}
+
+<span class="keyword">impl</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; <span class="type">StackMaker</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; <span class="keyword">for</span> <span class="type">arena::TypedArena</span>&lt;<span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;&gt; {
+    <span class="keyword">fn</span> <span class="function-name">make_null</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt; {
+        <span class="keyword">self</span>.alloc(<span class="type">HsNull</span>(<span class="type">HsLeaf</span>{ <span class="variable-name">arena</span>: <span class="keyword">self</span> }))
+    }
+    <span class="keyword">fn</span> <span class="function-name">make_cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">x</span>: <span class="type">X</span>, <span class="variable-name">n</span>: <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt; {
+        <span class="keyword">self</span>.alloc(<span class="type">HsCons</span>(<span class="type">HsNode</span> { <span class="variable-name">arena</span>: <span class="keyword">self</span>, <span class="variable-name">value</span>: x, <span class="variable-name">next</span>: n }))
+    }
+}
+
+
+<span class="keyword">pub</span> <span class="keyword">type</span> <span class="type">HSV</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; = <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;;
+<span class="keyword">pub</span> <span class="keyword">type</span> <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; = <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">HSV</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;&gt;;
+<span class="keyword">pub</span> <span class="keyword">type</span> <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; = &amp;'<span class="variable-name">a</span> <span class="type">HSV</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;;
+
+<span class="keyword">impl</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt; <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">is_empty</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">bool</span> {
+        <span class="keyword">match</span> *<span class="keyword">self</span> {
+            <span class="type">HsCons</span>(_) =&gt; <span class="keyword">false</span>,
+            <span class="type">HsNull</span>(_) =&gt; <span class="keyword">true</span>,
+        }
+    }
+
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">arena</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+        <span class="keyword">match</span> *<span class="keyword">self</span> {
+            <span class="type">HsCons</span>(<span class="keyword">ref</span> node) =&gt; node.arena,
+            <span class="type">HsNull</span>(<span class="keyword">ref</span> leaf) =&gt; leaf.arena,
+        }
+    }
+
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">empty</span>(<span class="variable-name">arena</span>: <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+        arena.make_null()
+    }
+
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">x</span>: <span class="type">X</span>) -&gt; <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+        <span class="keyword">self</span>.arena().make_cons(x, <span class="keyword">self</span>)
+    }
+
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">tail</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">Option</span>&lt;<span class="type">HS</span>&lt;<span class="type">X</span>&gt;&gt; {
+        <span class="keyword">match</span> <span class="keyword">self</span> {
+            &amp;<span class="type">HsNull</span>(_) =&gt; <span class="type">None</span>,
+            &amp;<span class="type">HsCons</span>(<span class="keyword">ref</span> n) =&gt; <span class="type">Some</span>(n.next),
+        }
+    }
+
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">head</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">Option</span>&lt;<span class="type">X</span>&gt; {
+        <span class="keyword">match</span> <span class="keyword">self</span> {
+            &amp;<span class="type">HsNull</span>(_) =&gt; <span class="type">None</span>,
+            &amp;<span class="type">HsCons</span>(n) =&gt; <span class="type">Some</span>(n.value),
+        }
+    }
+}
+
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> r = <span class="type">arena::TypedArena::</span>&lt;<span class="type">HSV</span>&lt;<span class="type">int</span>&gt;&gt;::new();
+    <span class="keyword">let</span> r1 = &amp;r;
+    <span class="keyword">let</span> s0a = <span class="type">HeavyStack::</span>empty(r1);            <span class="comment-delimiter">// </span><span class="comment">()
+</span>    <span class="preprocessor">assert!</span>(s0a.is_empty());
+
+    <span class="keyword">let</span> s1b = s0a.cons(1);       <span class="comment-delimiter">// </span><span class="comment">(1)
+</span>    <span class="preprocessor">assert!</span>(s1b.head().unwrap() == 1);
+    <span class="preprocessor">println!</span>(<span class="string">&quot;s1b.head: {}&quot;</span>, s1b.head());
+}
+
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: The code does not compile. There is something
+</span><span class="comment-delimiter">// </span><span class="comment">fundamentally wrong with the &quot;desired&quot; API above. Come
+</span><span class="comment-delimiter">// </span><span class="comment">up with a fix.
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">HINT: Review first exercise from ex10.
+</span>
+
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Add an additional `head_and_tail` method that follows
+</span><span class="comment-delimiter">// </span><span class="comment">through on the original intent of `fn head</span><span class="comment">`</span><span class="comment">.
+</span>
+
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Inspect the size_of the HeavyStack&lt;int&gt; type.  (See end
+</span><span class="comment-delimiter">// </span><span class="comment">of ex7.rs)
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">Can you explain where every byte comes from?
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">Can you make an alternative API what is more size-efficient?
+</span></pre>
+
+ </body>
+</html>

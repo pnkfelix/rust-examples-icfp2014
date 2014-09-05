@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>ex4.rs</title>
+<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<style type="text/css"><!-- 
+body { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default   { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default a { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+ --></style>
+
+    <script type="text/javascript"><!--
+  // this function is needed to work around
+  // a bug in IE related to element attributes
+  function hasClass(obj)
+  {
+      var result = false;
+      if (obj.getAttributeNode("class") != null)
+      {
+          result = obj.getAttributeNode("class").value;
+      }
+      return result;
+  }
+
+  function stripe(id)
+  {
+      // the flag we'll use to keep track of
+      // whether the current row is odd or even
+      var even = false;
+
+      // if arguments are provided to specify the colors
+      // of the even & odd rows, then use the them;
+      // otherwise use the following defaults:
+      var evenColor = arguments[1] ? arguments[1] : "#fff";
+      var oddColor  = arguments[2] ? arguments[2] : "#ddd";
+
+      // obtain a reference to the desired table
+      // if no such table exists, abort
+      var table = document.getElementById(id);
+      if (! table) { return; }
+
+      // by definition, tables can have more than one tbody
+      // element, so we'll have to get the list of child
+      // &lt;tbody&gt;s
+      var tbodies = table.getElementsByTagName("tbody");
+
+      // and iterate through them...
+      for (var h = 0; h < tbodies.length; h++)
+      {
+          // find all the &lt;tr&gt; elements...
+          var trs = tbodies[h].getElementsByTagName("tr");
+
+          // ... and iterate through them
+          for (var i = 0; i < trs.length; i++)
+          {
+              // avoid rows that have a class attribute
+              // or backgroundColor style
+              if (! hasClass(trs[i]) &&
+                  ! trs[i].style.backgroundColor)
+              {
+                  // get all the cells in this row...
+                  var tds = trs[i].getElementsByTagName("td");
+
+                  // and iterate through them...
+                  for (var j = 0; j < tds.length; j++)
+                  {
+                      var mytd = tds[j];
+
+                      // avoid cells that have a class attribute
+                      // or backgroundColor style
+                      if (! hasClass(mytd) &&
+                          ! mytd.style.backgroundColor)
+                      {
+                          mytd.style.backgroundColor =
+                            even ? evenColor : oddColor;
+                      }
+                  }
+              }
+              // flip from odd to even, or vice-versa
+              even =  ! even;
+          }
+      }
+  }
+
+  function toggle_invis( name )
+  {
+      var filter =
+        { acceptNode:
+          function( node )
+          { var classname = node.id;
+            if( classname )
+            { var classbase = classname.substr( 0, name.length );
+              if( classbase == name ) { return NodeFilter.FILTER_ACCEPT; } }
+            return NodeFilter.FILTER_SKIP; } };
+      var walker = document.createTreeWalker( document.body           ,
+                                              NodeFilter.SHOW_ELEMENT ,
+                                              filter                  ,
+                                              false                   );
+      while( walker.nextNode() )
+      {
+          var e = walker.currentNode;
+          if( e.style.display == "none" ) { e.style.display = "inline"; }
+          else                            { e.style.display = "none";   }
+      }
+  }
+--> </script>
+  </head>
+  <body onload="stripe('index'); return true;">
+
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 4: Ownership and references
+</span>
+<span class="keyword">struct</span> <span class="type">Thing</span> {
+    <span class="variable-name">label</span>: <span class="type">char</span>,
+    <span class="variable-name">count</span>: <span class="type">i32</span>,
+}
+
+<span class="keyword">fn</span> <span class="function-name">print_thing_val</span>(<span class="variable-name">x</span>: <span class="type">Thing</span>) {
+    <span class="comment-delimiter">// </span><span class="comment">(This is the same code we were looking at before.)
+</span>    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of {:c} is {:d}&quot;</span>, x.label, x.count);
+}
+
+<span class="keyword">fn</span> <span class="function-name">print_thing_ref</span>(<span class="variable-name">x</span>: &amp;<span class="type">Thing</span>) {
+    <span class="comment-delimiter">//                </span><span class="comment">^~ this is a &quot;reference type constructor&quot;
+</span>    <span class="comment-delimiter">//                   </span><span class="comment">`&amp;T` is pronounced &quot;(shared) reference to T&quot;
+</span>    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of `{:c}` is {:d}&quot;</span>, x.label, x.count);
+
+    <span class="keyword">let</span> <span class="type">Thing</span> { label, count } = *x;
+    <span class="preprocessor">println!</span>(<span class="string">&quot;another way to bind (`{:c}` still {:d})&quot;</span>, label, count);
+
+    <span class="keyword">let</span> &amp;<span class="type">Thing</span> { label, count } = x;
+    <span class="preprocessor">println!</span>(<span class="string">&quot;even &amp;pat is a pattern (and `{:c}` still {:d})&quot;</span>, label, count);
+}
+
+<span class="keyword">fn</span> <span class="function-name">print_thing_box</span>(<span class="variable-name">x</span>: <span class="type">Box</span>&lt;<span class="type">Thing</span>&gt;) {
+    <span class="comment-delimiter">//                      </span><span class="comment">^~~ This is another type constructor
+</span>    <span class="comment-delimiter">//                          </span><span class="comment">(One of many library-provided &quot;smart-pointers&quot;)
+</span>    <span class="comment-delimiter">//                          </span><span class="comment">`Box&lt;T&gt;` is pronounced &quot;boxed T&quot;
+</span>    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of {:c} is {:d}&quot;</span>, x.label, x.count);
+}
+
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="comment-delimiter">// </span><span class="comment">stack-allocated, as before
+</span>    <span class="keyword">let</span> t1 = <span class="type">Thing</span> { <span class="variable-name">label</span>: <span class="string">'a'</span>, <span class="variable-name">count</span>: 5 };
+
+    <span class="comment-delimiter">// </span><span class="comment">These two calls have the same side-effects ...
+</span>    print_thing_val(t1);
+    print_thing_ref(&amp;t1);
+    <span class="comment-delimiter">// </span><span class="comment">... but they do their work in very diferrent ways.
+</span>
+    <span class="comment-delimiter">// </span><span class="comment">*heap*-allocated Thing
+</span>    <span class="keyword">let</span> t2 = <span class="keyword">box</span> <span class="type">Thing</span> { <span class="variable-name">label</span>: <span class="string">'b'</span>, <span class="variable-name">count</span>: 4 };
+    print_thing_box(t2);
+
+    <span class="comment-delimiter">// </span><span class="comment">EXERCISE: Add code below here to print both `t1` and `t2`
+</span>    <span class="comment-delimiter">// </span><span class="comment">again.  Discuss.
+</span>}
+
+
+<span class="comment-delimiter">// </span><span class="comment">Box&lt;Thing&gt; behaves very differently from `Thing` and `&amp;Thing`.
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">A detail we've been avoiding due to something special with `Thing`.
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">But it is *not* something special about `Box`; it is *Thing* that
+</span><span class="comment-delimiter">// </span><span class="comment">is special; discuss.
+</span>
+
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: add a new function, `increment_count`, that takes a
+</span><span class="comment-delimiter">// </span><span class="comment">`Thing` and adds 1 to its count field in a way that the *caller*
+</span><span class="comment-delimiter">// </span><span class="comment">can observe.
+</span></pre>
+
+ </body>
+</html>

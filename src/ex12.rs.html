@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>ex12.rs</title>
+<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<style type="text/css"><!-- 
+body { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default   { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default a { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.constant   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.constant a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+ --></style>
+
+    <script type="text/javascript"><!--
+  // this function is needed to work around
+  // a bug in IE related to element attributes
+  function hasClass(obj)
+  {
+      var result = false;
+      if (obj.getAttributeNode("class") != null)
+      {
+          result = obj.getAttributeNode("class").value;
+      }
+      return result;
+  }
+
+  function stripe(id)
+  {
+      // the flag we'll use to keep track of
+      // whether the current row is odd or even
+      var even = false;
+
+      // if arguments are provided to specify the colors
+      // of the even & odd rows, then use the them;
+      // otherwise use the following defaults:
+      var evenColor = arguments[1] ? arguments[1] : "#fff";
+      var oddColor  = arguments[2] ? arguments[2] : "#ddd";
+
+      // obtain a reference to the desired table
+      // if no such table exists, abort
+      var table = document.getElementById(id);
+      if (! table) { return; }
+
+      // by definition, tables can have more than one tbody
+      // element, so we'll have to get the list of child
+      // &lt;tbody&gt;s
+      var tbodies = table.getElementsByTagName("tbody");
+
+      // and iterate through them...
+      for (var h = 0; h < tbodies.length; h++)
+      {
+          // find all the &lt;tr&gt; elements...
+          var trs = tbodies[h].getElementsByTagName("tr");
+
+          // ... and iterate through them
+          for (var i = 0; i < trs.length; i++)
+          {
+              // avoid rows that have a class attribute
+              // or backgroundColor style
+              if (! hasClass(trs[i]) &&
+                  ! trs[i].style.backgroundColor)
+              {
+                  // get all the cells in this row...
+                  var tds = trs[i].getElementsByTagName("td");
+
+                  // and iterate through them...
+                  for (var j = 0; j < tds.length; j++)
+                  {
+                      var mytd = tds[j];
+
+                      // avoid cells that have a class attribute
+                      // or backgroundColor style
+                      if (! hasClass(mytd) &&
+                          ! mytd.style.backgroundColor)
+                      {
+                          mytd.style.backgroundColor =
+                            even ? evenColor : oddColor;
+                      }
+                  }
+              }
+              // flip from odd to even, or vice-versa
+              even =  ! even;
+          }
+      }
+  }
+
+  function toggle_invis( name )
+  {
+      var filter =
+        { acceptNode:
+          function( node )
+          { var classname = node.id;
+            if( classname )
+            { var classbase = classname.substr( 0, name.length );
+              if( classbase == name ) { return NodeFilter.FILTER_ACCEPT; } }
+            return NodeFilter.FILTER_SKIP; } };
+      var walker = document.createTreeWalker( document.body           ,
+                                              NodeFilter.SHOW_ELEMENT ,
+                                              filter                  ,
+                                              false                   );
+      while( walker.nextNode() )
+      {
+          var e = walker.currentNode;
+          if( e.style.display == "none" ) { e.style.display = "inline"; }
+          else                            { e.style.display = "none";   }
+      }
+  }
+--> </script>
+  </head>
+  <body onload="stripe('index'); return true;">
+
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 12: lifetimes
+</span>
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> s_1_0 = [1, 0];
+    <span class="keyword">let</span> s_0_1 = [0, 1];
+    <span class="keyword">let</span> first_choice = choose(s_1_0, s_0_1);
+    <span class="preprocessor">println!</span>(<span class="string">&quot;first_choice: {}&quot;</span>, first_choice);
+
+    <span class="keyword">let</span> second_choice = subdata_then_choose();
+    <span class="preprocessor">println!</span>(<span class="string">&quot;second_choice: {}&quot;</span>, second_choice);
+}
+
+<span class="keyword">fn</span> <span class="function-name">choose</span>&lt;'<span class="variable-name">a</span>&gt;(<span class="variable-name">x</span>: &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>], <span class="variable-name">y</span>: &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>]) -&gt; &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>] {
+    <span class="comment-delimiter">//    </span><span class="comment">^       ^              ^              ^
+</span>    <span class="comment-delimiter">//    </span><span class="comment">|       |              |              </span><span class="comment">|</span><span class="comment">
+</span>    <span class="comment-delimiter">//    </span><span class="comment">|       |              |              ^~ These .</span><span class="comment">.</span><span class="comment">.
+</span>    <span class="comment-delimiter">//    </span><span class="comment">|       |              ^~ are ...
+</span>    <span class="comment-delimiter">//    </span><span class="comment">|       ^~ all ...
+</span>    <span class="comment-delimiter">//    </span><span class="comment">|
+</span>    <span class="comment-delimiter">//    </span><span class="comment">^~~~ lifetimes.  (Bound here, referenced above.)
+</span>
+    <span class="comment-delimiter">// </span><span class="comment">A semi-random complex predicate between inputs.
+</span>    <span class="keyword">if</span> y[x[0]] &gt; x[y[0]] {
+        x
+    } <span class="keyword">else</span> {
+        y
+    }
+}
+
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 1: What happens if you just remove all the lifetimes from
+</span><span class="comment-delimiter">// </span><span class="comment">signature of `choose` ?
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 2: Remove the `return constant;` in `subdata_then_choose`
+</span><span class="comment-delimiter">// </span><span class="comment">and uncomment the other code there.  Discuss.  How could you
+</span><span class="comment-delimiter">// </span><span class="comment">address this?
+</span>
+<span class="keyword">fn</span> <span class="function-name">subdata_then_choose</span>&lt;'<span class="variable-name">a</span>&gt;() -&gt; &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>]  {
+    <span class="keyword">return</span> c; <span class="comment-delimiter">// </span><span class="comment">XXX
+</span>    <span class="comment-delimiter">/*</span><span class="comment">
+
+    let s_1_0_0 = [1, 0, 0];
+    let s_0_2_0 = [0, 2, 0];
+    choose(s_1_0_0, s_0_2_0)
+
+    */</span>
+}
+
+<span class="keyword">static</span> <span class="constant">c</span> : [<span class="type">uint</span>, ..3] = [0,1,2];
+</pre>
+
+ </body>
+</html>

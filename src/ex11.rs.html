@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>ex11.rs</title>
+<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<style type="text/css"><!-- 
+body { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default   { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.default a { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
+span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+ --></style>
+
+    <script type="text/javascript"><!--
+  // this function is needed to work around
+  // a bug in IE related to element attributes
+  function hasClass(obj)
+  {
+      var result = false;
+      if (obj.getAttributeNode("class") != null)
+      {
+          result = obj.getAttributeNode("class").value;
+      }
+      return result;
+  }
+
+  function stripe(id)
+  {
+      // the flag we'll use to keep track of
+      // whether the current row is odd or even
+      var even = false;
+
+      // if arguments are provided to specify the colors
+      // of the even & odd rows, then use the them;
+      // otherwise use the following defaults:
+      var evenColor = arguments[1] ? arguments[1] : "#fff";
+      var oddColor  = arguments[2] ? arguments[2] : "#ddd";
+
+      // obtain a reference to the desired table
+      // if no such table exists, abort
+      var table = document.getElementById(id);
+      if (! table) { return; }
+
+      // by definition, tables can have more than one tbody
+      // element, so we'll have to get the list of child
+      // &lt;tbody&gt;s
+      var tbodies = table.getElementsByTagName("tbody");
+
+      // and iterate through them...
+      for (var h = 0; h < tbodies.length; h++)
+      {
+          // find all the &lt;tr&gt; elements...
+          var trs = tbodies[h].getElementsByTagName("tr");
+
+          // ... and iterate through them
+          for (var i = 0; i < trs.length; i++)
+          {
+              // avoid rows that have a class attribute
+              // or backgroundColor style
+              if (! hasClass(trs[i]) &&
+                  ! trs[i].style.backgroundColor)
+              {
+                  // get all the cells in this row...
+                  var tds = trs[i].getElementsByTagName("td");
+
+                  // and iterate through them...
+                  for (var j = 0; j < tds.length; j++)
+                  {
+                      var mytd = tds[j];
+
+                      // avoid cells that have a class attribute
+                      // or backgroundColor style
+                      if (! hasClass(mytd) &&
+                          ! mytd.style.backgroundColor)
+                      {
+                          mytd.style.backgroundColor =
+                            even ? evenColor : oddColor;
+                      }
+                  }
+              }
+              // flip from odd to even, or vice-versa
+              even =  ! even;
+          }
+      }
+  }
+
+  function toggle_invis( name )
+  {
+      var filter =
+        { acceptNode:
+          function( node )
+          { var classname = node.id;
+            if( classname )
+            { var classbase = classname.substr( 0, name.length );
+              if( classbase == name ) { return NodeFilter.FILTER_ACCEPT; } }
+            return NodeFilter.FILTER_SKIP; } };
+      var walker = document.createTreeWalker( document.body           ,
+                                              NodeFilter.SHOW_ELEMENT ,
+                                              filter                  ,
+                                              false                   );
+      while( walker.nextNode() )
+      {
+          var e = walker.currentNode;
+          if( e.style.display == "none" ) { e.style.display = "inline"; }
+          else                            { e.style.display = "none";   }
+      }
+  }
+--> </script>
+  </head>
+  <body onload="stripe('index'); return true;">
+
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 11: enum</span><span class="comment">s</span><span class="comment">
+</span>
+<span class="comment-delimiter">// </span><span class="comment">(Can you believe we got this far without &quot;real&quot; Algebraic Data Types?)
+</span>
+<span class="keyword">enum</span> <span class="type">Request</span>&lt;<span class="type">X</span>&gt; {
+    <span class="type">PlayOutsideWith</span>(<span class="type">X</span>),
+    <span class="type">GoSwimming</span>,
+    <span class="type">LookAtStars</span>,
+    <span class="type">EatLunch</span>,
+}
+
+<span class="keyword">enum</span> <span class="type">Answer</span>&lt;<span class="type">X</span>&gt; {
+    <span class="type">Yes</span>(<span class="type">X</span>),
+    <span class="type">No</span>(<span class="type">X</span>),
+    <span class="type">Maybe</span>,
+}
+
+<span class="keyword">struct</span> <span class="type">Parent</span>;
+<span class="comment-delimiter">//     </span><span class="comment">^~~~~~~ whoa.  (zero-sized!)
+</span>
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> parent = <span class="type">Parent</span>;
+
+    <span class="keyword">let</span> requests : [<span class="type">Request</span>&lt;<span class="type">String</span>&gt;, ..3] = [<span class="type">GoSwimming</span>, <span class="type">LookAtStars</span>, <span class="type">EatLunch</span>];
+    <span class="keyword">for</span> request <span class="keyword">in</span> requests.iter() {
+        <span class="keyword">match</span> parent.can_i(request) {
+
+            <span class="type">Yes</span>(_) =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;Hooray!&quot;</span>);
+                <span class="keyword">return</span>;
+            }
+            <span class="type">No</span>(why) =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;I do not believe you when you say {:s}!&quot;</span>, why);
+            }
+            <span class="type">Maybe</span> =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;Well, how about ...&quot;</span>);
+            }
+        }
+    }
+}
+
+<span class="keyword">impl</span>&lt;<span class="type">X</span>&gt; <span class="type">Answer</span>&lt;<span class="type">X</span>&gt; {
+    <span class="keyword">fn</span> <span class="function-name">map</span>&lt;<span class="type">Y</span>&gt;(<span class="keyword">self</span>, <span class="variable-name">f</span>: |<span class="type">X</span>| -&gt; <span class="type">Y</span>) -&gt; <span class="type">Answer</span>&lt;<span class="type">Y</span>&gt; {
+        <span class="preprocessor">unimplemented!</span>(); <span class="comment-delimiter">// </span><span class="comment">XXX see exercise 2 below.
+</span>    }
+}
+
+<span class="keyword">impl</span> <span class="type">Parent</span> {
+    <span class="keyword">fn</span> <span class="function-name">can_i</span>&lt;<span class="type">X</span>&gt;(&amp;<span class="keyword">self</span>, <span class="variable-name">r</span>: <span class="type">Request</span>&lt;<span class="type">X</span>&gt;) -&gt; <span class="type">Answer</span>&lt;<span class="type">String</span>&gt; {
+        <span class="keyword">let</span> answer = <span class="keyword">match</span> r {
+            <span class="type">LookAtStars</span> =&gt; <span class="type">Maybe</span>,
+
+            <span class="type">GoSwimming</span> |
+            <span class="type">PlayOutsideWith</span>(_) =&gt; <span class="type">No</span>(<span class="string">&quot;we live in on Mars&quot;</span>),
+
+            <span class="type">EatLunch</span> =&gt; <span class="type">Yes</span>(<span class="string">&quot;it is close to noon&quot;</span>),
+        };
+
+        answer.map(|string_literal| <span class="type">String::</span>from_str(string_literal))
+    }
+}
+
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: code does not compile; fix it somehow.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: implement `Answer::map`
+</span></pre>
+
+ </body>
+</html>
