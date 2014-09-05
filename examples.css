@@ -1,0 +1,176 @@
+body {
+  font-family: Courier, monospace;
+  font-size: medium;
+  padding-top: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 80px;
+  max-width: 980px;
+  background-color: #f8faff;
+  text-align: justify;
+}
+h1 {
+  font-weight: bold;
+}
+h2 {
+  font-weight: bold;
+}
+h3 {
+  font-weight: bold;
+  display: inline;
+}
+body.bookmarks {
+  background-image: url("bookmarks.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+}
+html {
+  height: 100%;
+}
+div.col {
+  float: left;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+}
+
+@media (max-resolution: 200dpi), (orientation: landscape) {
+  div.col {
+    width: 380px;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 30px;
+  }  
+  body {
+    font-size: medium;
+  }
+  h1 {
+    font-size: large;
+  }
+  h2 {
+    font-size: medium;
+  }
+  h3 {
+    font-size: medium;
+  }
+}
+
+@media (min-resolution: 200dpi) and (orientation: portrait) {
+  div.col {
+    width: 760px;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 60px;
+  }  
+  body {
+    font-size: large;
+  }
+  h1 {
+    font-size: xx-large;
+  }
+  h2 {
+    font-size: large;
+  }
+  h3 {
+    font-size: large;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+p.paper_title {
+  margin-left:-5px;
+}
+p.paper_authors {
+  margin-top:-10px;
+  margin-left:15px;
+}
+p.paper_details {
+  margin-top:-12px;
+  margin-left:15px;
+}
+a {
+  text-decoration: underline;
+  -moz-text-decoration-style: dashed;
+  color: black;
+}
+
+body.bookmarks a {
+  color: white;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  padding-left: 15px;
+  padding-right: 0px;
+  margin: 0;
+}
+
+div.patch {
+  position: absolute;
+  z-index: 20;
+  background-color: #f8faff;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  height: 870px;
+  width: 840px;
+  overflow: hidden;
+}
+
+div.cover {
+  z-index: 10;
+  position: fixed;
+  background-color: white;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transition: opacity 0.5s ease;
+}
+
+div.cover_opacity {
+  opacity: 0.7;
+}
+
+div.cover_size {
+  width: 100%;
+  height: 100%;  
+}
+
+a.patch_close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+a.patch_download {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+div.patch_listing {
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  height: 800px;
+  width: 800px;
+  font-size: small;
+  overflow: auto;
+}
+
+a.rendered {
+    color: blue
+}
+
+a.download {
+    color: red
+}
+
+a.playpen {
+    color: green
+}
