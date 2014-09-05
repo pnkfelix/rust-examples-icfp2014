@@ -22,5 +22,7 @@ pub fn main() {
     run!(ex8);
     run!(ex9);
     run!(ex10);
-    run!(ex11);
+    // run!(ex11); // broken by design
+    // run!(ex12); // broken by design
+    // run!(ex13); // broken by design
 }
