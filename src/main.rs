@@ -22,4 +22,5 @@ pub fn main() {
     run!(ex8);
     run!(ex9);
     run!(ex10);
+    run!(ex11);
 }
