@@ -7,28 +7,28 @@ pub fn main() {
     #![allow(unnecessary_parens)]
 
     println!("We've seen this before");
-    for i in range(0u32, 10) {
+    for i in 0u32..10 {
         println!("i: {}", i);
     }
 
     println!("But how about this:");
-    for j in range(0u32, 100).filter(|k| k % 15 == 1) {
+    for j in (0u32..100).filter(|k| k % 15 == 1) {
         println!("j: {}", j);
     }
 
     println!("Or this:");
-    let v : Vec<Vec<uint>> = (iter::range_inclusive(1, 5)
-                              .map(|i| Vec::from_elem(i, i))
-                              .inspect(|v| println!("  iteration is seeing {}", v))
-                              .collect());
+    let v : Vec<Vec<usize>> = (1..6)
+                              .map(|i| iter::repeat(i).take(i).collect())
+                              .inspect(|v| println!("  iteration is seeing {:?}", v))
+                              .collect();
 
     for (i, elem_a) in v.iter().enumerate() {
-        println!("I didn't take elem[{:u}] == {}", i, elem_a);
+        println!("I didn't take elem[{}] == {:?}", i, elem_a);
         //                           exercise 1 below ^~~~~~
     }
 
-    for (i, elem_b) in v.move_iter().enumerate().filter(|&(j, _)| j % 2 == 0) {
-        println!("took elem[{:u}] == {}", i, elem_b);
+    for (i, elem_b) in v.into_iter().enumerate().filter(|&(j, _)| j % 2 == 0) {
+        println!("took elem[{}] == {:?}", i, elem_b);
     }
 }
 

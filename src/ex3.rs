@@ -1,5 +1,6 @@
 // Example 3: mutation
 
+#[derive(Copy, Clone)]
 struct Thing {
     label: char,
     count: i32,
@@ -36,7 +37,7 @@ pub fn main() {
 }
 
 fn print_thing(x: Thing) {
-    println!("the count of {:c} is {:d}", x.label, x.count);
+    println!("the count of {} is {}", x.label, x.count);
 }
 
 fn try_to_change(x: Thing) {

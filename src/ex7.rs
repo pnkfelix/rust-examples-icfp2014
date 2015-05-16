@@ -1,8 +1,8 @@
 // Example 7: loops, fixed length arrays, and slices.
 
 pub fn main() {
-    let some_nums : [i32, ..9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    //              ^             ^~~~~~~~~~~~~~~~~~~~~~~~~ an array literal
+    let some_nums : [i32; 9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    //              ^           ^~~~~~~~~~~~~~~~~~~~~~~~~ an array literal
     //              |
     //              ^~~~~~~~~~ fixed-length array type
 
@@ -10,24 +10,24 @@ pub fn main() {
 
     print_via_loop(some_nums);
 
-    print_via_while(some_nums.as_slice());
+    print_via_while(&some_nums[..]);
 
-    let short : [i32, ..4] = [1,2,3,4];
+    let short : [i32; 4] = [1,2,3,4];
 
-    print_via_while(short.as_slice());
+    print_via_while(&short[..]);
 
     // print_via_loop(short); // XXX (see exercise below)
 
 }
 
-fn print_via_for(some_nums: [i32, ..9]) {
-    for k in range(0, 9) {
+fn print_via_for(some_nums: [i32; 9]) {
+    for k in 0..9 {
         // We will see more about `for` loops in exercise TODO
         println!("for, some_nums[k]: {}", some_nums[k]);
     }
 }
 
-fn print_via_loop(some_nums: [i32, ..9]) {
+fn print_via_loop(some_nums: [i32; 9]) {
     let mut i = 0;
     loop {
         println!("loop, some_nums[i]: {}", some_nums[i]);
@@ -63,8 +63,9 @@ fn print_via_while(some_nums: &[i32]) {
 // Discuss.
 
 fn print_sizes() {
+    #![allow(dead_code)]
     use std::mem;
 
-    println!(" size_of::<&[i32, ..9]>() == {:2u} bytes", mem::size_of::<&[i32, ..9]>());
-    println!("      size_of::<&[i32]>() == {:2u} bytes", mem::size_of::<&[i32]>());
+    println!(" size_of::<&[i32; 9]>() == {:2} bytes", mem::size_of::<&[i32; 9]>());
+    println!("      size_of::<&[i32]>() == {:2} bytes", mem::size_of::<&[i32]>());
 }

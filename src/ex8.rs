@@ -1,9 +1,11 @@
 // Example 8: closures, (bounded) polymorphism
 
-fn twice_i32(x0: i32, f: |arg: i32| -> i32) -> i32 {
-    // closure named `f`                 ^
-    //                                   |
-    //     ... with type ~~~~~~~~~~~~~~~~^
+fn twice_i32<F>(x0: i32, f: &F) -> i32 where F: Fn(i32) -> i32
+{   //                                             ^       ^
+    //    closure named `f`, which                 |       |
+    //  is a (generic type) `F` where              ^~~     |
+    //  `F` is an Fn (i.e. closure) that takes an `i32`    ^~~
+    //                                 ... and returns an `i32`.
 
     let x1 = f(x0); // (work-around weakness in current borrow-checker)
 
@@ -11,21 +13,21 @@ fn twice_i32(x0: i32, f: |arg: i32| -> i32) -> i32 {
 }
 
 pub fn main() {
-    println!("twice_i32(0, add_1): {}", twice_i32(0, |y| y+1));
+    println!("twice_i32(0, add_1): {}", twice_i32(0, &|y| y+1));
     let w = 3;
-    println!("twice_i32(0, add_w): {}", twice_i32(0, |z| z+w));
+    println!("twice_i32(0, add_w): {}", twice_i32(0, &|z| z+w));
 
-    println!("twice(0, add_1): {}", twice(0i32, |y| y+1));
+    println!("twice(0, add_1): {}", twice(0i32, &|y| y+1));
 
     // println!("twice_peano(0): {}", twice_peano(0i32)); // XXX (see exercise below)
 }
 
-pub fn twice<X>(x: X, f: |arg: X| -> X) -> X {
+pub fn twice<X, F>(x: X, f: &F) -> X where F: Fn(X) -> X {
     let x1 = f(x);
     f(x1)
 }
 
-trait Peano {
+pub trait Peano {
     fn succ(self) -> Self;
 }
 
@@ -35,6 +37,7 @@ impl Peano for i32 {
 }
 
 pub fn twice_peano<X:Peano>(x: X) -> X {
+    #![allow(unused_variables)]
     unimplemented!()
 
     // Hint: review ex4.rs

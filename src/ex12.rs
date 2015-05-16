@@ -3,18 +3,18 @@
 pub fn main() {
     let s_1_0 = [1, 0];
     let s_0_1 = [0, 1];
-    let first_choice = choose(s_1_0, s_0_1);
-    println!("first_choice: {}", first_choice);
+    let first_choice = choose(&s_1_0, &s_0_1);
+    println!("first_choice: {:?}", first_choice);
 
     let second_choice = subdata_then_choose();
-    println!("second_choice: {}", second_choice);
+    println!("second_choice: {:?}", second_choice);
 }
 
-fn choose<'a>(x: &'a [uint], y: &'a [uint]) -> &'a [uint] {
-    //    ^       ^              ^              ^
-    //    |       |              |              |
-    //    |       |              |              ^~ These ...
-    //    |       |              ^~ are ...
+fn choose<'a>(x: &'a [usize], y: &'a [usize]) -> &'a [usize] {
+    //    ^       ^               ^               ^
+    //    |       |               |               |
+    //    |       |               |               ^~ These ...
+    //    |       |               ^~ are ...
     //    |       ^~ all ...
     //    |
     //    ^~~~ lifetimes.  (Bound here, referenced above.)
@@ -34,8 +34,8 @@ fn choose<'a>(x: &'a [uint], y: &'a [uint]) -> &'a [uint] {
 // and uncomment the other code there.  Discuss.  How could you
 // address this?
 
-fn subdata_then_choose<'a>() -> &'a [uint]  {
-    return c; // XXX
+fn subdata_then_choose<'a>() -> &'a [u32]  {
+    return &c; // XXX
     /*
 
     let s_1_0_0 = [1, 0, 0];
@@ -45,4 +45,4 @@ fn subdata_then_choose<'a>() -> &'a [uint]  {
     */
 }
 
-static c : [uint, ..3] = [0,1,2];
+static c : [u32; 3] = [0,1,2];

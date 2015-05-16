@@ -32,5 +32,7 @@ impl Thing {                                                 /*
 // port earlier `increment_count` from ex4 to an instance method on `Thing`
 
 pub fn main() {
-
+    let t1 = Thing { label: 'a', count: 5 };
+    println!("{} get_count: {}, type_method: {}",
+             t1.label, t1.get_count(), Thing::type_method());
 }

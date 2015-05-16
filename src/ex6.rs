@@ -1,32 +1,37 @@
+use std::thread;
+use std::sync::mpsc;
+
 // Example 6: Taste of concurrency.
 
 struct Thing {
     label: String,
-    count: int
+    count: i32
 }
 
 impl Thing {
     fn new(c: char) -> Thing {
-        Thing { label: String::from_char(1, c), count: 0 }
+        let mut s = String::new();
+        s.push(c);
+        Thing { label: s, count: 0 }
     }
 }
 
 pub fn main() {
     let mut t = Thing::new('a');
+    t.count += 1;
 
     // A channel is for message passing between tasks
-    let (tx, rx) = channel();
+    let (tx, rx) = mpsc::channel();
 
     // Spawn a new task which takes t and tx.
-    // proc() is a kind of closure.
-    spawn(proc() {
+    thread::spawn(move || {
         // Send a message back to the main thread with t's label
-        tx.send(t.label);
+        tx.send(t.label).ok().expect("if none, send must have errored");
     });
 
     // Wait for the message.
     let c = rx.recv();
-    println!("received a message from {}", c);
+    println!("received a message from {:?}", c);
 }
 
 // EXERCISE: Add code that modifies `t` in the spawned task.  Add

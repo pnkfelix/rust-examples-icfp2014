@@ -1,6 +1,4 @@
-#![feature(macro_rules)]
-
-extern crate "fsk-examples" as fsk;
+extern crate fsk_examples as fsk;
 
 macro_rules! run {
     ($i:ident) => {

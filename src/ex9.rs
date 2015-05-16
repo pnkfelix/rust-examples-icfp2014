@@ -29,9 +29,10 @@ pub fn main() {
 
 fn print_contents(v: &Vec<u64>) {
     //               ^~~~~~~~~ see first exercise below
-    for i in range(0, v.len()) {
-        println!("v[{}]: {:16x}", i, *v.get(i));
-        //                           ^~~~~~~~~ XXX (see third exercise below)
+    for i in 0..v.len() {
+        let elem = &v[i];
+        println!("v[{}]: {:16x}", i, elem);
+        //                           ^~~~ XXX (see third exercise below)
     }
 }
 
@@ -42,10 +43,7 @@ fn print_contents(v: &Vec<u64>) {
 // (hint i. think about ex8.)
 // (hint ii. You may also need to use `use` to import something, similar to ex7::print_sizes.)
 //
-// NOTE: You do not need to complete this exercise to move on to the others below, though
-// you should attempt it before doing the third exercise.
-
-// EXERCISE 3: Try removing the asterisk from the code marked XXX above.  Discuss.
+// NOTE: You do not need to complete this exercise to move on to the others below.
 
 // EXERCISE 4: Uncomment code in fourth_exercise below.  What goes wrong?  How could
 // you fix this?  (Hint: review ex7.)

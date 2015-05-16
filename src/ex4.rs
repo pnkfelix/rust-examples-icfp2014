@@ -1,5 +1,6 @@
 // Example 4: Ownership and references
 
+#[derive(Copy, Clone)]
 struct Thing {
     label: char,
     count: i32,
@@ -7,26 +8,26 @@ struct Thing {
 
 fn print_thing_val(x: Thing) {
     // (This is the same code we were looking at before.)
-    println!("the count of {:c} is {:d}", x.label, x.count);
+    println!("the count of {} is {}", x.label, x.count);
 }
 
 fn print_thing_ref(x: &Thing) {
     //                ^~ this is a "reference type constructor"
     //                   `&T` is pronounced "(shared) reference to T"
-    println!("the count of `{:c}` is {:d}", x.label, x.count);
+    println!("the count of `{}` is {}", x.label, x.count);
 
     let Thing { label, count } = *x;
-    println!("another way to bind (`{:c}` still {:d})", label, count);
+    println!("another way to bind (`{}` still {})", label, count);
 
     let &Thing { label, count } = x;
-    println!("even &pat is a pattern (and `{:c}` still {:d})", label, count);
+    println!("even &pat is a pattern (and `{}` still {})", label, count);
 }
 
 fn print_thing_box(x: Box<Thing>) {
     //                      ^~~ This is another type constructor
     //                          (One of many library-provided "smart-pointers")
     //                          `Box<T>` is pronounced "boxed T"
-    println!("the count of {:c} is {:d}", x.label, x.count);
+    println!("the count of {} is {}", x.label, x.count);
 }
 
 pub fn main() {
@@ -39,7 +40,7 @@ pub fn main() {
     // ... but they do their work in very diferrent ways.
 
     // *heap*-allocated Thing
-    let t2 = box Thing { label: 'b', count: 4 };
+    let t2 = Box::new(Thing { label: 'b', count: 4 });
     print_thing_box(t2);
 
     // EXERCISE: Add code below here to print both `t1` and `t2`

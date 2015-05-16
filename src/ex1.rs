@@ -57,13 +57,10 @@ pub fn main() {
     ^~~ local variable binding introduced by `let`.           *
                                                               */
 
-    println!("`say_hi` returned {:u}", x);
+    println!("`say_hi` returned {}", x);
     //                          ^    ^~~ a second argument
     //                          |
-    //                          ^~~~ a hole for the argument (includes
-    //                               the format-specifier `u`, meaning
-    //                               "unsigned decimal", like %u in
-    //                               printf).
+    //                          ^~~~ a hole for the argument
 
     let x = call_say_hi_twice();
 
