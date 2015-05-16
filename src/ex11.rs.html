@@ -6,25 +6,25 @@
     <title>ex11.rs</title>
 <meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-size: 105%;  text-decoration: none; }
-span.default   { font-size: 105%;  text-decoration: none; }
-span.default a { font-size: 105%;  text-decoration: underline; }
-span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
-span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
-span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
-span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
-span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
-span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
-span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
-span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
-span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
-span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
-span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
-span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
-span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
-span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
-span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
-span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
+body { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #708183;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.default   { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #708183;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.default a { font-family: Menlo;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #708183;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.comment   { color: #465a61;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.comment a { color: #465a61;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
+span.comment-delimiter   { color: #465a61;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: none; }
+span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 500;  font-family: Menlo;  font-stretch: normal;  background: #042028;  font-size: 12pt;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
