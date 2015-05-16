@@ -21,18 +21,20 @@ struct Parent;
 pub fn main() {
     let parent = Parent;
 
-    let requests : [Request<String>, ..3] = [GoSwimming, LookAtStars, EatLunch];
+    let requests : [Request<String>; 3] = [Request::GoSwimming,
+                                           Request::LookAtStars,
+                                           Request::EatLunch];
     for request in requests.iter() {
         match parent.can_i(request) {
 
-            Yes(_) => {
+            Answer::Yes(_) => {
                 println!("Hooray!");
                 return;
             }
-            No(why) => {
-                println!("I do not believe you when you say {:s}!", why);
+            Answer::No(why) => {
+                println!("I do not believe you when you say {}!", why);
             }
-            Maybe => {
+            Answer::Maybe => {
                 println!("Well, how about ...");
             }
         }
@@ -40,7 +42,7 @@ pub fn main() {
 }
 
 impl<X> Answer<X> {
-    fn map<Y>(self, f: |X| -> Y) -> Answer<Y> {
+    fn map<Y, F>(self, f: F) -> Answer<Y> where F: Fn(X) -> Y {
         unimplemented!(); // XXX see exercise 2 below.
     }
 }
@@ -48,15 +50,15 @@ impl<X> Answer<X> {
 impl Parent {
     fn can_i<X>(&self, r: Request<X>) -> Answer<String> {
         let answer = match r {
-            LookAtStars => Maybe,
+            Request::LookAtStars => Answer::Maybe,
 
-            GoSwimming |
-            PlayOutsideWith(_) => No("we live in on Mars"),
+            Request::GoSwimming |
+            Request::PlayOutsideWith(_) => Answer::No("we live in on Mars"),
 
-            EatLunch => Yes("it is close to noon"),
+            Request::EatLunch => Answer::Yes("it is close to noon"),
         };
 
-        answer.map(|string_literal| String::from_str(string_literal))
+        answer.map(|string_literal| string_literal.to_string())
     }
 }
 

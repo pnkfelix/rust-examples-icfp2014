@@ -15,8 +15,8 @@ pub struct HsLeaf<'a, X:'a> {
 }
 
 pub enum HeavyStack<'a, X:'a> {
-    HsCons(HsNode<'a,X>),
-    HsNull(HsLeaf<'a,X>),
+    Cons(HsNode<'a,X>),
+    Null(HsLeaf<'a,X>),
 }
 
 trait StackMaker<'a,X> {
@@ -26,10 +26,10 @@ trait StackMaker<'a,X> {
 
 impl<'a,X> StackMaker<'a,X> for arena::TypedArena<HeavyStack<'a,X>> {
     fn make_null(&'a self) -> HS<X> {
-        self.alloc(HsNull(HsLeaf{ arena: self }))
+        self.alloc(HeavyStack::Null(HsLeaf{ arena: self }))
     }
     fn make_cons(&'a self, x: X, n: HS<'a,X>) -> HS<X> {
-        self.alloc(HsCons(HsNode { arena: self, value: x, next: n }))
+        self.alloc(HeavyStack::Cons(HsNode { arena: self, value: x, next: n }))
     }
 }
 
@@ -41,15 +41,15 @@ pub type HS<'a,X> = &'a HSV<'a,X>;
 impl<'a, X> HeavyStack<'a,X> {
     pub fn is_empty(&self) -> bool {
         match *self {
-            HsCons(_) => false,
-            HsNull(_) => true,
+            HeavyStack::Cons(_) => false,
+            HeavyStack::Null(_) => true,
         }
     }
 
     pub fn arena(&self) -> HA<'a,X> {
         match *self {
-            HsCons(ref node) => node.arena,
-            HsNull(ref leaf) => leaf.arena,
+            HeavyStack::Cons(ref node) => node.arena,
+            HeavyStack::Null(ref leaf) => leaf.arena,
         }
     }
 
@@ -63,28 +63,28 @@ impl<'a, X> HeavyStack<'a,X> {
 
     pub fn tail(&'a self) -> Option<HS<X>> {
         match self {
-            &HsNull(_) => None,
-            &HsCons(ref n) => Some(n.next),
+            &HeavyStack::Null(_) => None,
+            &HeavyStack::Cons(ref n) => Some(n.next),
         }
     }
 
     pub fn head(&'a self) -> Option<X> {
         match self {
-            &HsNull(_) => None,
-            &HsCons(n) => Some(n.value),
+            &HeavyStack::Null(_) => None,
+            &HeavyStack::Cons(n) => Some(n.value),
         }
     }
 }
 
 pub fn main() {
-    let r = arena::TypedArena::<HSV<int>>::new();
+    let r = arena::TypedArena::<HSV<i32>>::new();
     let r1 = &r;
     let s0a = HeavyStack::empty(r1);            // ()
     assert!(s0a.is_empty());
 
     let s1b = s0a.cons(1);       // (1)
     assert!(s1b.head().unwrap() == 1);
-    println!("s1b.head: {}", s1b.head());
+    println!("s1b.head: {:?}", s1b.head());
 }
 
 // EXERCISE: The code does not compile. There is something

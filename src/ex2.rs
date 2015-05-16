@@ -31,8 +31,8 @@ fn print_thing(x: Thing) -> i32 {
 
     // Field access uses the dot operator, just like C/Java.
 
-    println!("the count of {:d} is {:d}", x.label, x.count);
-    //                     ^~~~    ^~~~
+    println!("the count of {:x} in hex is {:x}", x.label, x.count);
+    //                     ^~~~           ^~~~
     // Arguments must match the holes (in number, and specifier if present).
 
     // (returning x.count for no real reason)
