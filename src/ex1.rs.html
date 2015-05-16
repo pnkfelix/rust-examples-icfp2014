@@ -4,27 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex1.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -125,11 +109,11 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 1: Hello World, functions, types.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">On with the show!
-</span>
-<span class="keyword">fn</span> <span class="function-name">say_hi</span>(<span class="variable-name">x</span>:<span class="type">u8</span>) -&gt; <span class="type">u8</span> {  <span class="comment-delimiter">/* </span><span class="comment">A function signature */</span>          <span class="comment-delimiter">/*</span><span class="comment">
+<pre>// Example 1: Hello World, functions, types.
+
+// On with the show!
+
+fn say_hi(x:u8) -&gt; u8 {  /* A function signature */          /*
 ^  ^     ^      ^  ^                                          *
 |  |     |      |  |                                          *
 |  |     |      |  ^~ 8-bit `u`nsigned integer                *
@@ -142,9 +126,9 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
 |                                                             *
 ^~ `fn` keyword marks start of a function item                *
                                                               *
-                                                              */</span>
+                                                              */
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;Hello world from ex1&quot;</span>); <span class="comment-delimiter">/* </span><span class="comment">a statement */</span>      <span class="comment-delimiter">/*</span><span class="comment">
+    println!(&quot;Hello world from ex1&quot;); /* a statement */      /*
     ^        ^                      ^~   terminated by `;`    *
     |        |                                                *
     |        ^~~~~~~~~~~~~~~~~~~~~~ string literal in &quot;&quot;      *
@@ -153,69 +137,66 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
              are (currently) marked with a `!` at the end     *
              of their name. Other macros include              *
              `assert!`, `assert_eq!`, `debug!`, `fail!`       *
-                                                              */</span>
+                                                              */
 
-    <span class="keyword">return</span> x+1;                                              <span class="comment-delimiter">/*</span><span class="comment">
+    return x+1;                                              /*
     ^~~~~~ Ahh; good old `return`                             *
-                                                              */</span>
+                                                              */
 }
 
-<span class="keyword">fn</span> <span class="function-name">call_say_hi</span>() -&gt; <span class="type">u8</span> {
+fn call_say_hi() -&gt; u8 {
 
-      say_hi(103)                                            <span class="comment-delimiter">/*</span><span class="comment">
+      say_hi(103)                                            /*
       ^~~~~~~~~~~^~~ a call expression...                     *
                  |                                            *
                  ^~ ... but, something's different here ...   *
                                                               *
   ^~~  ... hint: what's &quot;missing&quot; over here                   *
-                                                              */</span>
+                                                              */
 }
 
-<span class="keyword">fn</span> <span class="function-name">call_say_hi_twice</span>() -&gt; <span class="type">u8</span> { say_hi(103); say_hi(103) }
-<span class="comment-delimiter">//                </span><span class="comment">Easy to write one-liners: ~~~~~~~~~~^
-</span>
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="comment-delimiter">// </span><span class="comment">There are at least two &quot;interesting&quot; differences between the
-</span>    <span class="comment-delimiter">// </span><span class="comment">signatures of `main` and the `say_hi` family above.  Discuss.  :)
-</span>
-    <span class="keyword">let</span> x : <span class="type">u8</span> = call_say_hi();                              <span class="comment-delimiter">/*</span><span class="comment">
-</span><span class="comment">    ^     ^~~~ a type annotation, just like in fn signatures  *
+fn call_say_hi_twice() -&gt; u8 { say_hi(103); say_hi(103) }
+//                Easy to write one-liners: ~~~~~~~~~~^
+
+pub fn main() {
+    // There are at least two &quot;interesting&quot; differences between the
+    // signatures of `main` and the `say_hi` family above.  Discuss.  :)
+
+    let x : u8 = call_say_hi();                              /*
+    ^     ^~~~ a type annotation, just like in fn signatures  *
     |
     ^~~ local variable binding introduced by `let`.           *
-                                                              */</span>
+                                                              */
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;`say_hi` returned {:u}&quot;</span>, x);
-    <span class="comment-delimiter">//                          </span><span class="comment">^    ^~~ a second argument
-</span>    <span class="comment-delimiter">//                          </span><span class="comment">|
-</span>    <span class="comment-delimiter">//                          </span><span class="comment">^~~~ a hole for the argument (includes
-</span>    <span class="comment-delimiter">//                               </span><span class="comment">the format-specifier `u`, meaning
-</span>    <span class="comment-delimiter">//                               </span><span class="comment">&quot;unsigned decimal&quot;, like %u in
-</span>    <span class="comment-delimiter">//                               </span><span class="comment">printf).
-</span>
-    <span class="keyword">let</span> x = call_say_hi_twice();
+    println!(&quot;`say_hi` returned {}&quot;, x);
+    //                          ^    ^~~ a second argument
+    //                          |
+    //                          ^~~~ a hole for the argument
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;Repeat: it returned {}&quot;</span>, x);
-    <span class="comment-delimiter">//                            </span><span class="comment">^~ (but unlike printf, Rust has a
-</span>    <span class="comment-delimiter">//                                </span><span class="comment">general-purpose default that
-</span>    <span class="comment-delimiter">//                                </span><span class="comment">types can also opt into.)
-</span>
-    <span class="keyword">let</span> c;
-    <span class="comment-delimiter">//   </span><span class="comment">^~ can leave off the initial value for later assignment.
-</span>    <span class="comment-delimiter">//</span><span class="comment">
-</span>    <span class="comment-delimiter">//      </span><span class="comment">Also letting the type be inferred; Rust allows this for
-</span>    <span class="comment-delimiter">//      </span><span class="comment">local variable declarations, but not for `fn` signatures.
-</span>
-    c = x <span class="keyword">as</span> <span class="type">char</span>;
-    <span class="comment-delimiter">//    </span><span class="comment">^~~~~~~ casting syntax, read like `(char)x` in C/C++/Java.
-</span>
-    <span class="preprocessor">println!</span>(<span class="string">&quot;x (`{}`) as a char is `{}`&quot;</span>, x, c);
+    let x = call_say_hi_twice();
+
+    println!(&quot;Repeat: it returned {}&quot;, x);
+    //                            ^~ (but unlike printf, Rust has a
+    //                                general-purpose default that
+    //                                types can also opt into.)
+
+    let c;
+    //   ^~ can leave off the initial value for later assignment.
+    //
+    //      Also letting the type be inferred; Rust allows this for
+    //      local variable declarations, but not for `fn` signatures.
+
+    c = x as char;
+    //    ^~~~~~~ casting syntax, read like `(char)x` in C/C++/Java.
+
+    println!(&quot;x (`{}`) as a char is `{}`&quot;, x, c);
 }
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Change all of the above fn's to take and return `u32`
-</span><span class="comment-delimiter">// </span><span class="comment">instead of `u8`.
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">What happens? Why? How can we address it?
-</span></pre>
+// EXERCISE: Change all of the above fn's to take and return `u32`
+// instead of `u8`.
+//
+// What happens? Why? How can we address it?
+</pre>
 
  </body>
 </html>

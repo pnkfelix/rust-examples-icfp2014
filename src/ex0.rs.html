@@ -4,15 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex0.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -113,30 +109,30 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">/*</span><span class="comment">
+<pre>/*
 ^~ First things first: Delimited comment syntax
-*/</span>
+*/
 
-<span class="comment-delimiter">// </span><span class="comment">... and many people prefer end-of-line terminated style.
-</span><span class="comment-delimiter">// </span><span class="comment">Like C++, we offer both.  (Though Rust's /* */ can nest.)
-</span>                                                            <span class="comment-delimiter">/*</span><span class="comment">
+// ... and many people prefer end-of-line terminated style.
+// Like C++, we offer both.  (Though Rust's /* */ can nest.)
+                                                            /*
 ^                 I will use slash-star style occasionally,  *
 |                 e.g. when I want to point out something in *
 |                 the left-most column...                    *
 ^~ ... like this                                             *
-                                                             */</span>
+                                                             */
 
-<span class="comment-delimiter">//   </span><span class="comment">The style is *solely* for expositor</span><span class="comment">y</span><span class="comment"> purpose</span><span class="comment">s</span><span class="comment"> for today  ^
-</span><span class="comment-delimiter">//  </span><span class="comment">I have never seen any production cod</span><span class="comment">e</span><span class="comment"> tha</span><span class="comment">t</span><span class="comment"> actuall</span><span class="comment">y</span><span class="comment"> puts  |
-</span><span class="comment-delimiter">//                   </span><span class="comment">stars on the right-hand-sid</span><span class="comment">e</span><span class="comment"> like this ~~</span><span class="comment">^</span><span class="comment">
-</span>
-<span class="comment-delimiter">// </span><span class="comment">A quick word of warning: some comment forms are special.
-</span><span class="comment-delimiter">// </span><span class="comment">Namely `///`, `//!`, `/** */`, and `/*! */`; they turn
-</span><span class="comment-delimiter">// </span><span class="comment">into documentation blocks that try to attach themselves
-</span><span class="comment-delimiter">// </span><span class="comment">to some piece of code.  We won't be using these today.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">Anyway, on with the show!</span><span class="comment">
-</span></pre>
+//   The style is *solely* for expository purposes for today  ^
+//  I have never seen any production code that actually puts  |
+//                   stars on the right-hand-side like this ~~^
+
+// A quick word of warning: some comment forms are special.
+// Namely `///`, `//!`, `/** */`, and `/*! */`; they turn
+// into documentation blocks that try to attach themselves
+// to some piece of code.  We won't be using these today.
+
+// Anyway, on with the show!
+</pre>
 
  </body>
 </html>

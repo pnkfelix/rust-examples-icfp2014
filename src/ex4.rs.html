@@ -4,27 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex4.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -125,67 +109,68 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 4: Ownership and references
-</span>
-<span class="keyword">struct</span> <span class="type">Thing</span> {
-    <span class="variable-name">label</span>: <span class="type">char</span>,
-    <span class="variable-name">count</span>: <span class="type">i32</span>,
+<pre>// Example 4: Ownership and references
+
+#[derive(Copy, Clone)]
+struct Thing {
+    label: char,
+    count: i32,
 }
 
-<span class="keyword">fn</span> <span class="function-name">print_thing_val</span>(<span class="variable-name">x</span>: <span class="type">Thing</span>) {
-    <span class="comment-delimiter">// </span><span class="comment">(This is the same code we were looking at before.)
-</span>    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of {:c} is {:d}&quot;</span>, x.label, x.count);
+fn print_thing_val(x: Thing) {
+    // (This is the same code we were looking at before.)
+    println!(&quot;the count of {} is {}&quot;, x.label, x.count);
 }
 
-<span class="keyword">fn</span> <span class="function-name">print_thing_ref</span>(<span class="variable-name">x</span>: &amp;<span class="type">Thing</span>) {
-    <span class="comment-delimiter">//                </span><span class="comment">^~ this is a &quot;reference type constructor&quot;
-</span>    <span class="comment-delimiter">//                   </span><span class="comment">`&amp;T` is pronounced &quot;(shared) reference to T&quot;
-</span>    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of `{:c}` is {:d}&quot;</span>, x.label, x.count);
+fn print_thing_ref(x: &amp;Thing) {
+    //                ^~ this is a &quot;reference type constructor&quot;
+    //                   `&amp;T` is pronounced &quot;(shared) reference to T&quot;
+    println!(&quot;the count of `{}` is {}&quot;, x.label, x.count);
 
-    <span class="keyword">let</span> <span class="type">Thing</span> { label, count } = *x;
-    <span class="preprocessor">println!</span>(<span class="string">&quot;another way to bind (`{:c}` still {:d})&quot;</span>, label, count);
+    let Thing { label, count } = *x;
+    println!(&quot;another way to bind (`{}` still {})&quot;, label, count);
 
-    <span class="keyword">let</span> &amp;<span class="type">Thing</span> { label, count } = x;
-    <span class="preprocessor">println!</span>(<span class="string">&quot;even &amp;pat is a pattern (and `{:c}` still {:d})&quot;</span>, label, count);
+    let &amp;Thing { label, count } = x;
+    println!(&quot;even &amp;pat is a pattern (and `{}` still {})&quot;, label, count);
 }
 
-<span class="keyword">fn</span> <span class="function-name">print_thing_box</span>(<span class="variable-name">x</span>: <span class="type">Box</span>&lt;<span class="type">Thing</span>&gt;) {
-    <span class="comment-delimiter">//                      </span><span class="comment">^~~ This is another type constructor
-</span>    <span class="comment-delimiter">//                          </span><span class="comment">(One of many library-provided &quot;smart-pointers&quot;)
-</span>    <span class="comment-delimiter">//                          </span><span class="comment">`Box&lt;T&gt;` is pronounced &quot;boxed T&quot;
-</span>    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of {:c} is {:d}&quot;</span>, x.label, x.count);
+fn print_thing_box(x: Box&lt;Thing&gt;) {
+    //                      ^~~ This is another type constructor
+    //                          (One of many library-provided &quot;smart-pointers&quot;)
+    //                          `Box&lt;T&gt;` is pronounced &quot;boxed T&quot;
+    println!(&quot;the count of {} is {}&quot;, x.label, x.count);
 }
 
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="comment-delimiter">// </span><span class="comment">stack-allocated, as before
-</span>    <span class="keyword">let</span> t1 = <span class="type">Thing</span> { <span class="variable-name">label</span>: <span class="string">'a'</span>, <span class="variable-name">count</span>: 5 };
+pub fn main() {
+    // stack-allocated, as before
+    let t1 = Thing { label: 'a', count: 5 };
 
-    <span class="comment-delimiter">// </span><span class="comment">These two calls have the same side-effects ...
-</span>    print_thing_val(t1);
+    // These two calls have the same side-effects ...
+    print_thing_val(t1);
     print_thing_ref(&amp;t1);
-    <span class="comment-delimiter">// </span><span class="comment">... but they do their work in very diferrent ways.
-</span>
-    <span class="comment-delimiter">// </span><span class="comment">*heap*-allocated Thing
-</span>    <span class="keyword">let</span> t2 = <span class="keyword">box</span> <span class="type">Thing</span> { <span class="variable-name">label</span>: <span class="string">'b'</span>, <span class="variable-name">count</span>: 4 };
+    // ... but they do their work in very diferrent ways.
+
+    // *heap*-allocated Thing
+    let t2 = Box::new(Thing { label: 'b', count: 4 });
     print_thing_box(t2);
 
-    <span class="comment-delimiter">// </span><span class="comment">EXERCISE: Add code below here to print both `t1` and `t2`
-</span>    <span class="comment-delimiter">// </span><span class="comment">again.  Discuss.
-</span>}
+    // EXERCISE: Add code below here to print both `t1` and `t2`
+    // again.  Discuss.
+}
 
 
-<span class="comment-delimiter">// </span><span class="comment">Box&lt;Thing&gt; behaves very differently from `Thing` and `&amp;Thing`.
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">A detail we've been avoiding due to something special with `Thing`.
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">But it is *not* something special about `Box`; it is *Thing* that
-</span><span class="comment-delimiter">// </span><span class="comment">is special; discuss.
-</span>
+// Box&lt;Thing&gt; behaves very differently from `Thing` and `&amp;Thing`.
+//
+// A detail we've been avoiding due to something special with `Thing`.
+//
+// But it is *not* something special about `Box`; it is *Thing* that
+// is special; discuss.
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: add a new function, `increment_count`, that takes a
-</span><span class="comment-delimiter">// </span><span class="comment">`Thing` and adds 1 to its count field in a way that the *caller*
-</span><span class="comment-delimiter">// </span><span class="comment">can observe.
-</span></pre>
+
+// EXERCISE: add a new function, `increment_count`, that takes a
+// `Thing` and adds 1 to its count field in a way that the *caller*
+// can observe.
+</pre>
 
  </body>
 </html>

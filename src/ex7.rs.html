@@ -4,27 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex7.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -125,75 +109,76 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 7: loops, fixed length arrays, and slices.
-</span>
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="keyword">let</span> some_nums : [<span class="type">i32</span>, ..9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    <span class="comment-delimiter">//              </span><span class="comment">^             ^~~~~~~~~~~~~~~~~~~~~~~~~ an array literal
-</span>    <span class="comment-delimiter">//              </span><span class="comment">|
-</span>    <span class="comment-delimiter">//              </span><span class="comment">^~~~~~~~~~ fixed-length array typ</span><span class="comment">e</span><span class="comment">
-</span>
+<pre>// Example 7: loops, fixed length arrays, and slices.
+
+pub fn main() {
+    let some_nums : [i32; 9] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    //              ^           ^~~~~~~~~~~~~~~~~~~~~~~~~ an array literal
+    //              |
+    //              ^~~~~~~~~~ fixed-length array type
+
     print_via_for(some_nums);
 
     print_via_loop(some_nums);
 
-    print_via_while(some_nums.as_slice());
+    print_via_while(&amp;some_nums[..]);
 
-    <span class="keyword">let</span> short : [<span class="type">i32</span>, ..4] = [1,2,3,4];
+    let short : [i32; 4] = [1,2,3,4];
 
-    print_via_while(short.as_slice());
+    print_via_while(&amp;short[..]);
 
-    <span class="comment-delimiter">// </span><span class="comment">print_via_loop(short); // XXX (see exercise below)
-</span>
+    // print_via_loop(short); // XXX (see exercise below)
+
 }
 
-<span class="keyword">fn</span> <span class="function-name">print_via_for</span>(<span class="variable-name">some_nums</span>: [<span class="type">i32</span>, ..9]) {
-    <span class="keyword">for</span> k <span class="keyword">in</span> range(0, 9) {
-        <span class="comment-delimiter">// </span><span class="comment">We will see more about `for` loops in exercise TODO
-</span>        <span class="preprocessor">println!</span>(<span class="string">&quot;for, some_nums[k]: {}&quot;</span>, some_nums[k]);
+fn print_via_for(some_nums: [i32; 9]) {
+    for k in 0..9 {
+        // We will see more about `for` loops in exercise TODO
+        println!(&quot;for, some_nums[k]: {}&quot;, some_nums[k]);
     }
 }
 
-<span class="keyword">fn</span> <span class="function-name">print_via_loop</span>(<span class="variable-name">some_nums</span>: [<span class="type">i32</span>, ..9]) {
-    <span class="keyword">let</span> <span class="keyword">mut</span> i = 0;
-    <span class="keyword">loop</span> {
-        <span class="preprocessor">println!</span>(<span class="string">&quot;loop, some_nums[i]: {}&quot;</span>, some_nums[i]);
+fn print_via_loop(some_nums: [i32; 9]) {
+    let mut i = 0;
+    loop {
+        println!(&quot;loop, some_nums[i]: {}&quot;, some_nums[i]);
         i += 1;
-        <span class="keyword">if</span> i &gt; some_nums.len() { <span class="keyword">break</span>; }
+        if i &gt; some_nums.len() { break; }
     }
 }
 
 
-<span class="keyword">fn</span> <span class="function-name">print_via_while</span>(<span class="variable-name">some_nums</span>: &amp;[<span class="type">i32</span>]) {
-    <span class="comment-delimiter">// </span><span class="comment">This is very different ~~~~~^
-</span>    <span class="keyword">let</span> <span class="keyword">mut</span> j = 0;
-    <span class="keyword">while</span> j &lt; some_nums.len() {
-        <span class="preprocessor">println!</span>(<span class="string">&quot;while, some_nums[j]: {}&quot;</span>, some_nums[j]);
+fn print_via_while(some_nums: &amp;[i32]) {
+    // This is very different ~~~~~^
+    let mut j = 0;
+    while j &lt; some_nums.len() {
+        println!(&quot;while, some_nums[j]: {}&quot;, some_nums[j]);
         j += 1;
     }
 }
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Code above has (trivial) bug, so you never see
-</span><span class="comment-delimiter">// </span><span class="comment">`print_via_while` get called. Identify problem; fix in some way.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Uncomment the `print_via_loop` call that is commented out
-</span><span class="comment-delimiter">// </span><span class="comment">above. It does not work, while `print_via_while` does.  Why?
-</span><span class="comment-delimiter">// </span><span class="comment">(Hint: it has nothing to do with `while` vs `loop`.)
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">Figure out how to adapt `print_via_loop` accordingly.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Code above uses `as_slice()` to do certain conversions.
-</span><span class="comment-delimiter">// </span><span class="comment">Explore swapping in `slice_to` and `slice_from` instead; reverse
-</span><span class="comment-delimiter">// </span><span class="comment">engineer their semantics.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCSE: Add a call from `main` to the `print_sizes` method below.
-</span><span class="comment-delimiter">// </span><span class="comment">Discuss.
-</span>
-<span class="keyword">fn</span> <span class="function-name">print_sizes</span>() {
-    <span class="keyword">use</span> <span class="type">std::</span>mem;
+// EXERCISE: Code above has (trivial) bug, so you never see
+// `print_via_while` get called. Identify problem; fix in some way.
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot; size_of::&lt;&amp;[i32, ..9]&gt;() == {:2u} bytes&quot;</span>, <span class="type">mem::size_of::</span>&lt;&amp;[<span class="type">i32</span>, ..9]&gt;());
-    <span class="preprocessor">println!</span>(<span class="string">&quot;      size_of::&lt;&amp;[i32]&gt;() == {:2u} bytes&quot;</span>, <span class="type">mem::size_of::</span>&lt;&amp;[<span class="type">i32</span>]&gt;());
+// EXERCISE: Uncomment the `print_via_loop` call that is commented out
+// above. It does not work, while `print_via_while` does.  Why?
+// (Hint: it has nothing to do with `while` vs `loop`.)
+//
+// Figure out how to adapt `print_via_loop` accordingly.
+
+// EXERCISE: Code above uses `as_slice()` to do certain conversions.
+// Explore swapping in `slice_to` and `slice_from` instead; reverse
+// engineer their semantics.
+
+// EXERCSE: Add a call from `main` to the `print_sizes` method below.
+// Discuss.
+
+fn print_sizes() {
+    #![allow(dead_code)]
+    use std::mem;
+
+    println!(&quot; size_of::&lt;&amp;[i32; 9]&gt;() == {:2} bytes&quot;, mem::size_of::&lt;&amp;[i32; 9]&gt;());
+    println!(&quot;      size_of::&lt;&amp;[i32]&gt;() == {:2} bytes&quot;, mem::size_of::&lt;&amp;[i32]&gt;());
 }
 </pre>
 

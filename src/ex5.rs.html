@@ -4,23 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex5.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -121,41 +109,43 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 5: Methods.
-</span>
-<span class="keyword">struct</span> <span class="type">Thing</span> {
-    <span class="variable-name">label</span>: <span class="type">char</span>,
-    <span class="variable-name">count</span>: <span class="type">i32</span>,
+<pre>// Example 5: Methods.
+
+struct Thing {
+    label: char,
+    count: i32,
 }
 
-<span class="comment-delimiter">// </span><span class="comment">Example method definitions
-</span><span class="keyword">impl</span> <span class="type">Thing</span> {                                                 <span class="comment-delimiter">/*</span><span class="comment">
+// Example method definitions
+impl Thing {                                                 /*
 ^~~~ The `impl` keyword introduces a collection of method     *
      implementations for a type.                              *
-                                                              */</span>
+                                                              */
 
-    <span class="keyword">fn</span> <span class="function-name">get_count</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">i32</span> { <span class="keyword">self</span>.count }
-    <span class="comment-delimiter">//           </span><span class="comment">^~~~~ `self` parameter is special; doesn't
-</span>    <span class="comment-delimiter">//                  </span><span class="comment">need a type ascription (since that comes
-</span>    <span class="comment-delimiter">//                  </span><span class="comment">from the `impl` block), but you still need
-</span>    <span class="comment-delimiter">//                  </span><span class="comment">to indicate how it is being passed in).
-</span>
-    <span class="keyword">fn</span> <span class="function-name">type_method</span>() -&gt; <span class="type">i32</span> { 14 }
-    <span class="comment-delimiter">// </span><span class="comment">^~~~~~~~~~~~~ no `self` parameter means that the method
-</span>    <span class="comment-delimiter">//               </span><span class="comment">is associated with the *type*, rather than
-</span>    <span class="comment-delimiter">//               </span><span class="comment">with particular instances.
-</span>    <span class="comment-delimiter">//               </span><span class="comment">(Often calls a &quot;static&quot; method, though the syntax
-</span>    <span class="comment-delimiter">//                </span><span class="comment">here does not use that keyword)
-</span>}
+    fn get_count(&amp;self) -&gt; i32 { self.count }
+    //           ^~~~~ `self` parameter is special; doesn't
+    //                  need a type ascription (since that comes
+    //                  from the `impl` block), but you still need
+    //                  to indicate how it is being passed in).
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE:
-</span><span class="comment-delimiter">// </span><span class="comment">add a `new` method for consructing of a `Thing`
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE:
-</span><span class="comment-delimiter">// </span><span class="comment">port earlier `increment_count` from ex4 to an instance method on `Thing`
-</span>
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    fn type_method() -&gt; i32 { 14 }
+    // ^~~~~~~~~~~~~ no `self` parameter means that the method
+    //               is associated with the *type*, rather than
+    //               with particular instances.
+    //               (Often calls a &quot;static&quot; method, though the syntax
+    //                here does not use that keyword)
+}
 
+// EXERCISE:
+// add a `new` method for consructing of a `Thing`
+
+// EXERCISE:
+// port earlier `increment_count` from ex4 to an instance method on `Thing`
+
+pub fn main() {
+    let t1 = Thing { label: 'a', count: 5 };
+    println!(&quot;{} get_count: {}, type_method: {}&quot;,
+             t1.label, t1.get_count(), Thing::type_method());
 }
 </pre>
 

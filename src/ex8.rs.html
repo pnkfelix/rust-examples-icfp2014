@@ -4,27 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex8.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -125,57 +109,60 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 8: closures, (bounded) polymorphism
-</span>
-<span class="keyword">fn</span> <span class="function-name">twice_i32</span>(<span class="variable-name">x0</span>: <span class="type">i32</span>, <span class="variable-name">f</span>: |<span class="variable-name">arg</span>: <span class="type">i32</span>| -&gt; <span class="type">i32</span>) -&gt; <span class="type">i32</span> {
-    <span class="comment-delimiter">// </span><span class="comment">closure named `f`                 ^
-</span>    <span class="comment-delimiter">//                                   </span><span class="comment">|
-</span>    <span class="comment-delimiter">//     </span><span class="comment">... with type ~~~~~~~~~~~~~~~~^
-</span>
-    <span class="keyword">let</span> x1 = f(x0); <span class="comment-delimiter">// </span><span class="comment">(work-around weakness in current borrow-checker)
-</span>
+<pre>// Example 8: closures, (bounded) polymorphism
+
+fn twice_i32&lt;F&gt;(x0: i32, f: &amp;F) -&gt; i32 where F: Fn(i32) -&gt; i32
+{   //                                             ^       ^
+    //    closure named `f`, which                 |       |
+    //  is a (generic type) `F` where              ^~~     |
+    //  `F` is an Fn (i.e. closure) that takes an `i32`    ^~~
+    //                                 ... and returns an `i32`.
+
+    let x1 = f(x0); // (work-around weakness in current borrow-checker)
+
     f(x1)
 }
 
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="preprocessor">println!</span>(<span class="string">&quot;twice_i32(0, add_1): {}&quot;</span>, twice_i32(0, |y| y+1));
-    <span class="keyword">let</span> w = 3;
-    <span class="preprocessor">println!</span>(<span class="string">&quot;twice_i32(0, add_w): {}&quot;</span>, twice_i32(0, |z| z+w));
+pub fn main() {
+    println!(&quot;twice_i32(0, add_1): {}&quot;, twice_i32(0, &amp;|y| y+1));
+    let w = 3;
+    println!(&quot;twice_i32(0, add_w): {}&quot;, twice_i32(0, &amp;|z| z+w));
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;twice(0, add_1): {}&quot;</span>, twice(0i32, |y| y+1));
+    println!(&quot;twice(0, add_1): {}&quot;, twice(0i32, &amp;|y| y+1));
 
-    <span class="comment-delimiter">// </span><span class="comment">println!(&quot;twice_peano(0): {}&quot;, twice_peano(0i32)); // XXX (see exercise below)
-</span>}
+    // println!(&quot;twice_peano(0): {}&quot;, twice_peano(0i32)); // XXX (see exercise below)
+}
 
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">twice</span>&lt;<span class="type">X</span>&gt;(<span class="variable-name">x</span>: <span class="type">X</span>, <span class="variable-name">f</span>: |<span class="variable-name">arg</span>: <span class="type">X</span>| -&gt; <span class="type">X</span>) -&gt; <span class="type">X</span> {
-    <span class="keyword">let</span> x1 = f(x);
+pub fn twice&lt;X, F&gt;(x: X, f: &amp;F) -&gt; X where F: Fn(X) -&gt; X {
+    let x1 = f(x);
     f(x1)
 }
 
-<span class="keyword">trait</span> <span class="type">Peano</span> {
-    <span class="keyword">fn</span> <span class="function-name">succ</span>(<span class="keyword">self</span>) -&gt; <span class="type">Self</span>;
+pub trait Peano {
+    fn succ(self) -&gt; Self;
 }
 
-<span class="preprocessor">#[cfg(exercise_for_reader)]</span>
-<span class="keyword">impl</span> <span class="type">Peano</span> <span class="keyword">for</span> <span class="type">i32</span> {
+#[cfg(exercise_for_reader)]
+impl Peano for i32 {
 
 }
 
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">twice_peano</span>&lt;<span class="variable-name">X</span>:<span class="type">Peano</span>&gt;(<span class="variable-name">x</span>: <span class="type">X</span>) -&gt; <span class="type">X</span> {
-    <span class="preprocessor">unimplemented!</span>()
+pub fn twice_peano&lt;X:Peano&gt;(x: X) -&gt; X {
+    #![allow(unused_variables)]
+    unimplemented!()
 
-    <span class="comment-delimiter">// </span><span class="comment">Hint: review ex4.rs
-</span>}
+    // Hint: review ex4.rs
+}
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: finish implementing Peano for `i32`; uncomment line marked XXX above.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE: The first two calls to `twice_i32` in `main` illustrate
-</span><span class="comment-delimiter">// </span><span class="comment">closures closed over their environment.  Try to make the classic
-</span><span class="comment-delimiter">// </span><span class="comment">`make_adder` example of a higher-order function, i.e. defined
-</span><span class="comment-delimiter">// </span><span class="comment">analogously to `make_adder ≡ λw.λz.z+w`
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">Discuss.
-</span></pre>
+// EXERCISE: finish implementing Peano for `i32`; uncomment line marked XXX above.
+
+// EXERCISE: The first two calls to `twice_i32` in `main` illustrate
+// closures closed over their environment.  Try to make the classic
+// `make_adder` example of a higher-order function, i.e. defined
+// analogously to `make_adder ≡ λw.λz.z+w`
+//
+// Discuss.
+</pre>
 
  </body>
 </html>

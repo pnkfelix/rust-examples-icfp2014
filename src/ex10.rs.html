@@ -4,25 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex10.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -123,53 +109,50 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 10: Iterators!
-</span>
-<span class="keyword">use</span> <span class="type">std::</span>iter;
+<pre>// Example 10: Iterators!
 
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="comment-delimiter">// </span><span class="comment">Felix, a Schemer at heart, likes unnecessary_parens
-</span>    <span class="preprocessor">#![allow(unnecessary_parens)</span><span class="preprocessor">]</span>
+use std::iter;
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;We've seen this before&quot;</span>);
-    <span class="keyword">for</span> i <span class="keyword">in</span> range(0u32, 10) {
-        <span class="preprocessor">println!</span>(<span class="string">&quot;i: {}&quot;</span>, i);
+pub fn main() {
+    println!(&quot;We've seen this before&quot;);
+    for i in 0u32..10 {
+        println!(&quot;i: {}&quot;, i);
     }
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;But how about this:&quot;</span>);
-    <span class="keyword">for</span> j <span class="keyword">in</span> range(0u32, 100).filter(|k| k % 15 == 1) {
-        <span class="preprocessor">println!</span>(<span class="string">&quot;j: {}&quot;</span>, j);
+    println!(&quot;But how about this:&quot;);
+    for j in (0u32..100).filter(|k| k % 15 == 1) {
+        println!(&quot;j: {}&quot;, j);
     }
 
-    <span class="preprocessor">println!</span>(<span class="string">&quot;Or this:&quot;</span>);
-    <span class="keyword">let</span> v : <span class="type">Vec</span>&lt;<span class="type">Vec</span>&lt;<span class="type">uint</span>&gt;&gt; = (<span class="type">iter::</span>range_inclusive(1, 5)
-                              .map(|i| <span class="type">Vec::</span>from_elem(i, i))
-                              .inspect(|v| <span class="preprocessor">println!</span>(<span class="string">&quot;  iteration is seeing {}&quot;</span>, v))
-                              .collect());
+    println!(&quot;Or this:&quot;);
+    let v : Vec&lt;Vec&lt;usize&gt;&gt; = (1..6)
+                              .map(|i| iter::repeat(i).take(i).collect())
+                              .inspect(|v| println!(&quot;  iteration is seeing {:?}&quot;, v))
+                              .collect();
 
-    <span class="keyword">for</span> (i, elem_a) <span class="keyword">in</span> v.iter().enumerate() {
-        <span class="preprocessor">println!</span>(<span class="string">&quot;I didn't take elem[{:u}] == {}&quot;</span>, i, elem_a);
-        <span class="comment-delimiter">//                           </span><span class="comment">exercise 1 below ^~~~~~
-</span>    }
+    for (i, elem_a) in v.iter().enumerate() {
+        println!(&quot;I didn't take elem[{}] == {:?}&quot;, i, elem_a);
+        //                           exercise 1 below ^~~~~~
+    }
 
-    <span class="keyword">for</span> (i, elem_b) <span class="keyword">in</span> v.move_iter().enumerate().filter(|&amp;(j, _)| j % 2 == 0) {
-        <span class="preprocessor">println!</span>(<span class="string">&quot;took elem[{:u}] == {}&quot;</span>, i, elem_b);
+    for (i, elem_b) in v.into_iter().enumerate().filter(|&amp;(j, _)| j % 2 == 0) {
+        println!(&quot;took elem[{}] == {:?}&quot;, i, elem_b);
     }
 }
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE 1: What type have `elem_a`/`elem_b` above?
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">HINT: If unsure, add new bindin</span><span class="comment">g</span><span class="comment"> with a type ascription and see if
-</span><span class="comment-delimiter">// </span><span class="comment">type checker accepts it.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE 2: Figure out how to iterate over the characters
-</span><span class="comment-delimiter">// </span><span class="comment">(codepoints) in a string literal.
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE 3: Figure out how to iterate over the space-separated
-</span><span class="comment-delimiter">// </span><span class="comment">words in a string literal.
-</span><span class="comment-delimiter">//</span><span class="comment">
-</span><span class="comment-delimiter">// </span><span class="comment">HINT: Play with methods here: http://doc.rust-lang.org/std/str/primitive.str.htm</span><span class="comment">l</span><span class="comment">
-</span></pre>
+// EXERCISE 1: What type have `elem_a`/`elem_b` above?
+//
+// HINT: If unsure, add new binding with a type ascription and see if
+// type checker accepts it.
+
+// EXERCISE 2: Figure out how to iterate over the characters
+// (codepoints) in a string literal.
+
+// EXERCISE 3: Figure out how to iterate over the space-separated
+// words in a string literal.
+//
+// HINT: Play with methods here: http://doc.rust-lang.org/std/str/primitive.str.html
+</pre>
 
  </body>
 </html>

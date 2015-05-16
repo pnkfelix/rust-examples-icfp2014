@@ -4,29 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>ex12.rs</title>
-<meta name="generator" content="emacs 24.3.92.1; htmlfontify 0.21" />
+<meta name="generator" content="emacs 24.5.1; htmlfontify 0.21" />
 <style type="text/css"><!-- 
-body { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default   { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.default a { font-family: Menlo, monospace;  font-stretch: normal;  font-weight: 500;  font-style: normal;  color: #52676f;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.constant   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.constant a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.type   { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.type a { color: #a57705;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.variable-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.variable-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.string   { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.string a { color: #259185;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.preprocessor   { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.preprocessor a { color: #bd3612;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.function-name   { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.function-name a { color: #2075c7;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.keyword   { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.keyword a { color: #728a05;  font-style: normal;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
-span.comment-delimiter   { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: none; }
-span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 500;  font-family: Menlo, monospace;  font-stretch: normal;  background: #fcf4dc;  font-size: 18pt;  text-decoration: underline; }
+body { font-size: 105%;  text-decoration: none; }
+span.default   { font-size: 105%;  text-decoration: none; }
+span.default a { font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -127,54 +109,54 @@ span.comment-delimiter a { color: #81908f;  font-style: italic;  font-weight: 50
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre><span class="comment-delimiter">// </span><span class="comment">Example 12: lifetimes
-</span>
-<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="keyword">let</span> s_1_0 = [1, 0];
-    <span class="keyword">let</span> s_0_1 = [0, 1];
-    <span class="keyword">let</span> first_choice = choose(s_1_0, s_0_1);
-    <span class="preprocessor">println!</span>(<span class="string">&quot;first_choice: {}&quot;</span>, first_choice);
+<pre>// Example 12: lifetimes
 
-    <span class="keyword">let</span> second_choice = subdata_then_choose();
-    <span class="preprocessor">println!</span>(<span class="string">&quot;second_choice: {}&quot;</span>, second_choice);
+pub fn main() {
+    let s_1_0 = [1, 0];
+    let s_0_1 = [0, 1];
+    let first_choice = choose(&amp;s_1_0, &amp;s_0_1);
+    println!(&quot;first_choice: {:?}&quot;, first_choice);
+
+    let second_choice = subdata_then_choose();
+    println!(&quot;second_choice: {:?}&quot;, second_choice);
 }
 
-<span class="keyword">fn</span> <span class="function-name">choose</span>&lt;'<span class="variable-name">a</span>&gt;(<span class="variable-name">x</span>: &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>], <span class="variable-name">y</span>: &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>]) -&gt; &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>] {
-    <span class="comment-delimiter">//    </span><span class="comment">^       ^              ^              ^
-</span>    <span class="comment-delimiter">//    </span><span class="comment">|       |              |              </span><span class="comment">|</span><span class="comment">
-</span>    <span class="comment-delimiter">//    </span><span class="comment">|       |              |              ^~ These .</span><span class="comment">.</span><span class="comment">.
-</span>    <span class="comment-delimiter">//    </span><span class="comment">|       |              ^~ are ...
-</span>    <span class="comment-delimiter">//    </span><span class="comment">|       ^~ all ...
-</span>    <span class="comment-delimiter">//    </span><span class="comment">|
-</span>    <span class="comment-delimiter">//    </span><span class="comment">^~~~ lifetimes.  (Bound here, referenced above.)
-</span>
-    <span class="comment-delimiter">// </span><span class="comment">A semi-random complex predicate between inputs.
-</span>    <span class="keyword">if</span> y[x[0]] &gt; x[y[0]] {
+fn choose&lt;'a&gt;(x: &amp;'a [usize], y: &amp;'a [usize]) -&gt; &amp;'a [usize] {
+    //    ^       ^               ^               ^
+    //    |       |               |               |
+    //    |       |               |               ^~ These ...
+    //    |       |               ^~ are ...
+    //    |       ^~ all ...
+    //    |
+    //    ^~~~ lifetimes.  (Bound here, referenced above.)
+
+    // A semi-random complex predicate between inputs.
+    if y[x[0]] &gt; x[y[0]] {
         x
-    } <span class="keyword">else</span> {
+    } else {
         y
     }
 }
 
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE 1: What happens if you just remove all the lifetimes from
-</span><span class="comment-delimiter">// </span><span class="comment">signature of `choose` ?
-</span>
-<span class="comment-delimiter">// </span><span class="comment">EXERCISE 2: Remove the `return constant;` in `subdata_then_choose`
-</span><span class="comment-delimiter">// </span><span class="comment">and uncomment the other code there.  Discuss.  How could you
-</span><span class="comment-delimiter">// </span><span class="comment">address this?
-</span>
-<span class="keyword">fn</span> <span class="function-name">subdata_then_choose</span>&lt;'<span class="variable-name">a</span>&gt;() -&gt; &amp;'<span class="variable-name">a</span> [<span class="type">uint</span>]  {
-    <span class="keyword">return</span> c; <span class="comment-delimiter">// </span><span class="comment">XXX
-</span>    <span class="comment-delimiter">/*</span><span class="comment">
+// EXERCISE 1: What happens if you just remove all the lifetimes from
+// signature of `choose` ?
+
+// EXERCISE 2: Remove the `return constant;` in `subdata_then_choose`
+// and uncomment the other code there.  Discuss.  How could you
+// address this?
+
+fn subdata_then_choose&lt;'a&gt;() -&gt; &amp;'a [u32]  {
+    return &amp;A_CONSTANT; // XXX
+    /*
 
     let s_1_0_0 = [1, 0, 0];
     let s_0_2_0 = [0, 2, 0];
     choose(s_1_0_0, s_0_2_0)
 
-    */</span>
+    */
 }
 
-<span class="keyword">static</span> <span class="constant">c</span> : [<span class="type">uint</span>, ..3] = [0,1,2];
+static A_CONSTANT : [u32; 3] = [0,1,2];
 </pre>
 
  </body>
