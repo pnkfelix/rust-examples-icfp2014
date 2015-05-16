@@ -1,3 +1,4 @@
+(require 'rust-mode)
 (require 'htmlfontify)
 
 ;; If all you want to do is convert all the .rs files in a directory, then
@@ -11,6 +12,7 @@
   (let ((dir (concat (file-name-as-directory default-directory) "src")))
     (let ((srcdir dir)
           (dstdir dir)
+          (hfy-display-class '((class color)))
           (filename (file-name-nondirectory file)))
       (print `(hfy-copy-and-fontify-file ,srcdir ,dstdir ,filename))
       (hfy-copy-and-fontify-file srcdir dstdir filename))))

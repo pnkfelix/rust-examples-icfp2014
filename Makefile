@@ -1,6 +1,7 @@
 default: tested gen-html
 
 EMACS:=/Applications/Emacs.app/Contents/MacOS/Emacs
+RUST_MODE_DIR:=$(HOME)/ConfigFiles/Elisp/rust-mode
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
@@ -20,8 +21,8 @@ tested: $(DEBUG_TARGET)
 .PHONY: gen-html
 gen-html: $(HTML_FILES)
 
-%.rs.html: %.rs
-	$(EMACS) --batch --load emacs-batch-init.el --eval '(htmlfontify-file "$?")'
+%.rs.html: %.rs emacs-batch-init.el
+	$(EMACS) --batch --directory $(RUST_MODE_DIR) --load emacs-batch-init.el --eval '(htmlfontify-file "$<")'
 
 $(DEBUG_TARGET): $(RS_FILES)
 	cargo build
