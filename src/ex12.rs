@@ -35,7 +35,7 @@ fn choose<'a>(x: &'a [usize], y: &'a [usize]) -> &'a [usize] {
 // address this?
 
 fn subdata_then_choose<'a>() -> &'a [u32]  {
-    return &c; // XXX
+    return &A_CONSTANT; // XXX
     /*
 
     let s_1_0_0 = [1, 0, 0];
@@ -45,4 +45,4 @@ fn subdata_then_choose<'a>() -> &'a [u32]  {
     */
 }
 
-static c : [u32; 3] = [0,1,2];
+static A_CONSTANT : [u32; 3] = [0,1,2];

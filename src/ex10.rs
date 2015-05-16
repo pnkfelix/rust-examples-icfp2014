@@ -3,9 +3,6 @@
 use std::iter;
 
 pub fn main() {
-    // Felix, a Schemer at heart, likes unnecessary_parens
-    #![allow(unnecessary_parens)]
-
     println!("We've seen this before");
     for i in 0u32..10 {
         println!("i: {}", i);
