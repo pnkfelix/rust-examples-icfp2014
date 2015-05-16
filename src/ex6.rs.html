@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,50 +125,50 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>use std::thread;
-use std::sync::mpsc;
+<pre><span class="keyword">use</span> <span class="type">std::</span>thread;
+<span class="keyword">use</span> <span class="type">std::sync::</span>mpsc;
 
-// Example 6: Taste of concurrency.
-
-struct Thing {
-    label: String,
-    count: i32
+<span class="comment-delimiter">// </span><span class="comment">Example 6: Taste of concurrency.
+</span>
+<span class="keyword">struct</span> <span class="type">Thing</span> {
+    <span class="variable-name">label</span>: <span class="type">String</span>,
+    <span class="variable-name">count</span>: <span class="type">i32</span>
 }
 
-impl Thing {
-    fn new(c: char) -&gt; Thing {
-        let mut s = String::new();
+<span class="keyword">impl</span> <span class="type">Thing</span> {
+    <span class="keyword">fn</span> <span class="function-name">new</span>(<span class="variable-name">c</span>: <span class="type">char</span>) -&gt; <span class="type">Thing</span> {
+        <span class="keyword">let</span> <span class="keyword">mut</span> s = <span class="type">String::</span>new();
         s.push(c);
-        Thing { label: s, count: 0 }
+        <span class="type">Thing</span> { <span class="variable-name">label</span>: s, <span class="variable-name">count</span>: 0 }
     }
 }
 
-pub fn main() {
-    let mut t = Thing::new('a');
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> <span class="keyword">mut</span> t = <span class="type">Thing::</span>new(<span class="string">'</span><span class="string">a</span><span class="string">'</span>);
     t.count += 1;
 
-    // A channel is for message passing between tasks
-    let (tx, rx) = mpsc::channel();
+    <span class="comment-delimiter">// </span><span class="comment">A channel is for message passing between tasks
+</span>    <span class="keyword">let</span> (tx, rx) = <span class="type">mpsc::</span>channel();
 
-    // Spawn a new task which takes t and tx.
-    thread::spawn(move || {
-        // Send a message back to the main thread with t's label
-        tx.send(t.label).ok().expect(&quot;if none, send must have errored&quot;);
+    <span class="comment-delimiter">// </span><span class="comment">Spawn a new task which takes t and tx.
+</span>    <span class="type">thread::</span>spawn(<span class="keyword">move</span> || {
+        <span class="comment-delimiter">// </span><span class="comment">Send a message back to the main thread with t's label
+</span>        tx.send(t.label).ok().expect(<span class="string">&quot;if none, send must have errored&quot;</span>);
     });
 
-    // Wait for the message.
-    let c = rx.recv();
-    println!(&quot;received a message from {:?}&quot;, c);
+    <span class="comment-delimiter">// </span><span class="comment">Wait for the message.
+</span>    <span class="keyword">let</span> c = rx.recv();
+    <span class="preprocessor">println!</span>(<span class="string">&quot;received a message from {:?}&quot;</span>, c);
 }
 
-// EXERCISE: Add code that modifies `t` in the spawned task.  Add
-// instrumentation to inspect that state in the original task; Did the
-// original get modified by the spawned task?
-
-// EXERCISE: The definition of `Thing` above uses `String` for its label.
-// Change that back to `char` (and fix the code to accomodate the change).
-// Then repeat previous exercise.  Discuss.
-</pre>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Add code that modifies `t` in the spawned task.  Add
+</span><span class="comment-delimiter">// </span><span class="comment">instrumentation to inspect that state in the original task; Did the
+</span><span class="comment-delimiter">// </span><span class="comment">original get modified by the spawned task?
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: The definition of `Thing` above uses `String` for its label.
+</span><span class="comment-delimiter">// </span><span class="comment">Change that back to `char` (and fix the code to accomodate the change).
+</span><span class="comment-delimiter">// </span><span class="comment">Then repeat previous exercise.  Discuss.
+</span></pre>
 
  </body>
 </html>

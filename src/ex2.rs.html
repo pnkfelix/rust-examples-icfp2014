@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,52 +125,52 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Example 2: Structures
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 2: Structures
+</span>
+<span class="comment-delimiter">// </span><span class="comment">A struct is a named record with fields - like struct in C or class in Java.
+</span><span class="keyword">struct</span> <span class="type">Thing</span> {
+    <span class="comment-delimiter">// </span><span class="comment">`field: type` syntax (as with fn signatures, the types are manadatory)
+</span>    <span class="variable-name">label</span>: <span class="type">char</span>,
+    <span class="variable-name">count</span>: <span class="type">i32</span>,
+    <span class="comment-delimiter">//     </span><span class="comment">^~~ 32-bit signed `i`nteger.
+</span>}
 
-// A struct is a named record with fields - like struct in C or class in Java.
-struct Thing {
-    // `field: type` syntax (as with fn signatures, the types are manadatory)
-    label: char,
-    count: i32,
-    //     ^~~ 32-bit signed `i`nteger.
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> i = 5;
+
+    <span class="keyword">let</span> t = <span class="type">Thing</span> { <span class="variable-name">label</span>: <span class="string">'</span><span class="string">a</span><span class="string">'</span>, <span class="variable-name">count</span>: i };
+    <span class="comment-delimiter">//      </span><span class="comment">^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ struct creation expression
+</span>
+    <span class="comment-delimiter">// </span><span class="comment">Note that `t` is *stack-allocated*, just like `i` is above;
+</span>    <span class="comment-delimiter">// </span><span class="comment">just like C/C++.
+</span>    <span class="comment-delimiter">//</span><span class="comment">
+</span>    <span class="comment-delimiter">// </span><span class="comment">(Compare to e.g. Java/Scheme/ML, where a record structures are
+</span>    <span class="comment-delimiter">// </span><span class="comment">heap-allocated and your variables can solely hold *references*
+</span>    <span class="comment-delimiter">// </span><span class="comment">to them.)
+</span>
+    print_thing(t); <span class="comment-delimiter">// </span><span class="comment">XXX (see exercise 2 below)
+</span>}
+
+<span class="keyword">fn</span> <span class="function-name">print_thing</span>(<span class="variable-name">x</span>: <span class="type">Thing</span>) -&gt; <span class="type">i32</span> {
+    <span class="comment-delimiter">//         </span><span class="comment">^~~~~~~~ again, `x` is stack-allocated locally here.
+</span>    <span class="comment-delimiter">//                  </span><span class="comment">Thus this thing has been *copied* from `main`
+</span>    <span class="comment-delimiter">//                  </span><span class="comment">to here.
+</span>
+    <span class="comment-delimiter">// </span><span class="comment">Field access uses the dot operator, just like C/Java.
+</span>
+    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of {:d} is {:d}&quot;</span>, x.label, x.count);
+    <span class="comment-delimiter">//                     </span><span class="comment">^~~~    ^~~~
+</span>    <span class="comment-delimiter">// </span><span class="comment">Arguments must match the holes (in number, and specifier if present).
+</span>
+    <span class="comment-delimiter">// </span><span class="comment">(returning x.count for no real reason)
+</span>    x.count
 }
 
-pub fn main() {
-    let i = 5;
-
-    let t = Thing { label: 'a', count: i };
-    //      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ struct creation expression
-
-    // Note that `t` is *stack-allocated*, just like `i` is above;
-    // just like C/C++.
-    //
-    // (Compare to e.g. Java/Scheme/ML, where a record structures are
-    // heap-allocated and your variables can solely hold *references*
-    // to them.)
-
-    print_thing(t); // XXX (see exercise 2 below)
-}
-
-fn print_thing(x: Thing) -&gt; i32 {
-    //         ^~~~~~~~ again, `x` is stack-allocated locally here.
-    //                  Thus this thing has been *copied* from `main`
-    //                  to here.
-
-    // Field access uses the dot operator, just like C/Java.
-
-    println!(&quot;the count of {:d} is {:d}&quot;, x.label, x.count);
-    //                     ^~~~    ^~~~
-    // Arguments must match the holes (in number, and specifier if present).
-
-    // (returning x.count for no real reason)
-    x.count
-}
-
-// EXERCISE 1: above is broken; compiler complains; fix it somehow.
-
-// EXERCISE 2: try deleting the semi-colon on the line marked XXX
-// above; what changes?
-</pre>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 1: above is broken; compiler complains; fix it somehow.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 2: try deleting the semi-colon on the line marked XXX
+</span><span class="comment-delimiter">// </span><span class="comment">above; what changes?
+</span></pre>
 
  </body>
 </html>

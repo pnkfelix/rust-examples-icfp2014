@@ -9,6 +9,10 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,30 +113,30 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>/*
+<pre><span class="comment-delimiter">/*</span><span class="comment">
 ^~ First things first: Delimited comment syntax
-*/
+*/</span>
 
-// ... and many people prefer end-of-line terminated style.
-// Like C++, we offer both.  (Though Rust's /* */ can nest.)
-                                                            /*
+<span class="comment-delimiter">// </span><span class="comment">... and many people prefer end-of-line terminated style.
+</span><span class="comment-delimiter">// </span><span class="comment">Like C++, we offer both.  (Though Rust's /* */ can nest.)
+</span>                                                            <span class="comment-delimiter">/*</span><span class="comment">
 ^                 I will use slash-star style occasionally,  *
 |                 e.g. when I want to point out something in *
 |                 the left-most column...                    *
 ^~ ... like this                                             *
-                                                             */
+                                                             */</span>
 
-//   The style is *solely* for expository purposes for today  ^
-//  I have never seen any production code that actually puts  |
-//                   stars on the right-hand-side like this ~~^
-
-// A quick word of warning: some comment forms are special.
-// Namely `///`, `//!`, `/** */`, and `/*! */`; they turn
-// into documentation blocks that try to attach themselves
-// to some piece of code.  We won't be using these today.
-
-// Anyway, on with the show!
-</pre>
+<span class="comment-delimiter">//   </span><span class="comment">The style is *solely* for expository purposes for today  ^
+</span><span class="comment-delimiter">//  </span><span class="comment">I have never seen any production code that actually puts  |
+</span><span class="comment-delimiter">//                   </span><span class="comment">stars on the right-hand-side like this ~~^
+</span>
+<span class="comment-delimiter">// </span><span class="comment">A quick word of warning: some comment forms are special.
+</span><span class="comment-delimiter">// </span><span class="comment">Namely `///`, `//!`, `/** */`, and `/*! */`; they turn
+</span><span class="comment-delimiter">// </span><span class="comment">into documentation blocks that try to attach themselves
+</span><span class="comment-delimiter">// </span><span class="comment">to some piece of code.  We won't be using these today.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">Anyway, on with the show!
+</span></pre>
 
  </body>
 </html>

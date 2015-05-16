@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,53 +125,53 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Example 3: mutation
-
-#[derive(Copy, Clone)]
-struct Thing {
-    label: char,
-    count: i32,
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 3: mutation
+</span>
+<span class="preprocessor">#[derive(Copy, Clone)]</span>
+<span class="keyword">struct</span> <span class="type">Thing</span> {
+    <span class="variable-name">label</span>: <span class="type">char</span>,
+    <span class="variable-name">count</span>: <span class="type">i32</span>,
 }
 
-pub fn main() {
-    let i = 5;
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> i = 5;
 
-    let t_a = Thing { label: 'a', count: i };
+    <span class="keyword">let</span> t_a = <span class="type">Thing</span> { <span class="variable-name">label</span>: <span class="string">'</span><span class="string">a</span><span class="string">'</span>, <span class="variable-name">count</span>: i };
 
-    let mut t_b = t_a;
-    //  ^       ^~~~~ initialize `t_b` as the value of `t_a`.
-    //  |
-    //  ^~~ the `mut` keyword marks a local binding that we plan to &quot;mutate&quot;
-    //  i.e. modify in some fashion that requires exclusive access.
-
-    // Mutability is inherited: If you have `mut`-access to `t`, then you
-    // have `mut` access to the fields of `t`.
-
-    t_b.label = 'b';
-    //        ^~~~~ this is an example of a mutation of `t_b`;
-
-    print!(&quot;t_a initially &quot;);
+    <span class="keyword">let</span> <span class="keyword">mut</span> t_b = t_a;
+    <span class="comment-delimiter">//  </span><span class="comment">^       ^~~~~ initialize `t_b` as the value of `t_a`.
+</span>    <span class="comment-delimiter">//  </span><span class="comment">|
+</span>    <span class="comment-delimiter">//  </span><span class="comment">^~~ the `mut` keyword marks a local binding that we plan to &quot;mutate&quot;
+</span>    <span class="comment-delimiter">//  </span><span class="comment">i.e. modify in some fashion that requires exclusive access.
+</span>
+    <span class="comment-delimiter">// </span><span class="comment">Mutability is inherited: If you have `mut`-access to `t`, then you
+</span>    <span class="comment-delimiter">// </span><span class="comment">have `mut` access to the fields of `t`.
+</span>
+    t_b.label = <span class="string">'</span><span class="string">b</span><span class="string">'</span>;
+    <span class="comment-delimiter">//        </span><span class="comment">^~~~~ this is an example of a mutation of `t_b`;
+</span>
+    <span class="preprocessor">print!</span>(<span class="string">&quot;t_a initially &quot;</span>);
     print_thing(t_a);
-    print!(&quot;t_b initially &quot;);
+    <span class="preprocessor">print!</span>(<span class="string">&quot;t_b initially &quot;</span>);
     print_thing(t_b);
 
     try_to_change(t_b);
 
-    print!(&quot;t_a post ttc: &quot;);
+    <span class="preprocessor">print!</span>(<span class="string">&quot;t_a post ttc: &quot;</span>);
     print_thing(t_a);
-    print!(&quot;t_b post ttc: &quot;);
+    <span class="preprocessor">print!</span>(<span class="string">&quot;t_b post ttc: &quot;</span>);
     print_thing(t_b);
 }
 
-fn print_thing(x: Thing) {
-    println!(&quot;the count of {} is {}&quot;, x.label, x.count);
+<span class="keyword">fn</span> <span class="function-name">print_thing</span>(<span class="variable-name">x</span>: <span class="type">Thing</span>) {
+    <span class="preprocessor">println!</span>(<span class="string">&quot;the count of {} is {}&quot;</span>, x.label, x.count);
 }
 
-fn try_to_change(x: Thing) {
-    // EXERCISE: increment the count of `x` within this function,
-    // so that the print-out below proves that your added code
-    // did indeed increment the count.
-    print!(&quot;    x in ttc: &quot;);
+<span class="keyword">fn</span> <span class="function-name">try_to_change</span>(<span class="variable-name">x</span>: <span class="type">Thing</span>) {
+    <span class="comment-delimiter">// </span><span class="comment">EXERCISE: increment the count of `x` within this function,
+</span>    <span class="comment-delimiter">// </span><span class="comment">so that the print-out below proves that your added code
+</span>    <span class="comment-delimiter">// </span><span class="comment">did indeed increment the count.
+</span>    <span class="preprocessor">print!</span>(<span class="string">&quot;    x in ttc: &quot;</span>);
     print_thing(x);
 }
 </pre>

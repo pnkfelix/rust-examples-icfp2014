@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,72 +125,72 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Example 11: enums
-
-// (Can you believe we got this far without &quot;real&quot; Algebraic Data Types?)
-
-enum Request&lt;X&gt; {
-    PlayOutsideWith(X),
-    GoSwimming,
-    LookAtStars,
-    EatLunch,
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 11: enums
+</span>
+<span class="comment-delimiter">// </span><span class="comment">(Can you believe we got this far without &quot;real&quot; Algebraic Data Types?)
+</span>
+<span class="keyword">enum</span> <span class="type">Request</span>&lt;<span class="type">X</span>&gt; {
+    <span class="type">PlayOutsideWith</span>(<span class="type">X</span>),
+    <span class="type">GoSwimming</span>,
+    <span class="type">LookAtStars</span>,
+    <span class="type">EatLunch</span>,
 }
 
-enum Answer&lt;X&gt; {
-    Yes(X),
-    No(X),
-    Maybe,
+<span class="keyword">enum</span> <span class="type">Answer</span>&lt;<span class="type">X</span>&gt; {
+    <span class="type">Yes</span>(<span class="type">X</span>),
+    <span class="type">No</span>(<span class="type">X</span>),
+    <span class="type">Maybe</span>,
 }
 
-struct Parent;
-//     ^~~~~~~ whoa.  (zero-sized!)
+<span class="keyword">struct</span> <span class="type">Parent</span>;
+<span class="comment-delimiter">//     </span><span class="comment">^~~~~~~ whoa.  (zero-sized!)
+</span>
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> parent = <span class="type">Parent</span>;
 
-pub fn main() {
-    let parent = Parent;
+    <span class="keyword">let</span> requests : [<span class="type">Request</span>&lt;<span class="type">String</span>&gt;, ..3] = [<span class="type">GoSwimming</span>, <span class="type">LookAtStars</span>, <span class="type">EatLunch</span>];
+    <span class="keyword">for</span> request <span class="keyword">in</span> requests.iter() {
+        <span class="keyword">match</span> parent.can_i(request) {
 
-    let requests : [Request&lt;String&gt;, ..3] = [GoSwimming, LookAtStars, EatLunch];
-    for request in requests.iter() {
-        match parent.can_i(request) {
-
-            Yes(_) =&gt; {
-                println!(&quot;Hooray!&quot;);
-                return;
+            <span class="type">Yes</span>(_) =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;Hooray!&quot;</span>);
+                <span class="keyword">return</span>;
             }
-            No(why) =&gt; {
-                println!(&quot;I do not believe you when you say {:s}!&quot;, why);
+            <span class="type">No</span>(why) =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;I do not believe you when you say {:s}!&quot;</span>, why);
             }
-            Maybe =&gt; {
-                println!(&quot;Well, how about ...&quot;);
+            <span class="type">Maybe</span> =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;Well, how about ...&quot;</span>);
             }
         }
     }
 }
 
-impl&lt;X&gt; Answer&lt;X&gt; {
-    fn map&lt;Y&gt;(self, f: |X| -&gt; Y) -&gt; Answer&lt;Y&gt; {
-        unimplemented!(); // XXX see exercise 2 below.
-    }
+<span class="keyword">impl</span>&lt;<span class="type">X</span>&gt; <span class="type">Answer</span>&lt;<span class="type">X</span>&gt; {
+    <span class="keyword">fn</span> <span class="function-name">map</span>&lt;<span class="type">Y</span>&gt;(<span class="keyword">self</span>, <span class="variable-name">f</span>: |<span class="type">X</span>| -&gt; <span class="type">Y</span>) -&gt; <span class="type">Answer</span>&lt;<span class="type">Y</span>&gt; {
+        <span class="preprocessor">unimplemented!</span>(); <span class="comment-delimiter">// </span><span class="comment">XXX see exercise 2 below.
+</span>    }
 }
 
-impl Parent {
-    fn can_i&lt;X&gt;(&amp;self, r: Request&lt;X&gt;) -&gt; Answer&lt;String&gt; {
-        let answer = match r {
-            LookAtStars =&gt; Maybe,
+<span class="keyword">impl</span> <span class="type">Parent</span> {
+    <span class="keyword">fn</span> <span class="function-name">can_i</span>&lt;<span class="type">X</span>&gt;(&amp;<span class="keyword">self</span>, <span class="variable-name">r</span>: <span class="type">Request</span>&lt;<span class="type">X</span>&gt;) -&gt; <span class="type">Answer</span>&lt;<span class="type">String</span>&gt; {
+        <span class="keyword">let</span> answer = <span class="keyword">match</span> r {
+            <span class="type">LookAtStars</span> =&gt; <span class="type">Maybe</span>,
 
-            GoSwimming |
-            PlayOutsideWith(_) =&gt; No(&quot;we live in on Mars&quot;),
+            <span class="type">GoSwimming</span> |
+            <span class="type">PlayOutsideWith</span>(_) =&gt; <span class="type">No</span>(<span class="string">&quot;we live in on Mars&quot;</span>),
 
-            EatLunch =&gt; Yes(&quot;it is close to noon&quot;),
+            <span class="type">EatLunch</span> =&gt; <span class="type">Yes</span>(<span class="string">&quot;it is close to noon&quot;</span>),
         };
 
-        answer.map(|string_literal| String::from_str(string_literal))
+        answer.map(|string_literal| <span class="type">String::</span>from_str(string_literal))
     }
 }
 
-// EXERCISE: code does not compile; fix it somehow.
-
-// EXERCISE: implement `Answer::map`
-</pre>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: code does not compile; fix it somehow.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: implement `Answer::map`
+</span></pre>
 
  </body>
 </html>

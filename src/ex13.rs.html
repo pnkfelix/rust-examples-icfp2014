@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,113 +125,113 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Exercise 13: A (toy) linked list.
+<pre><span class="comment-delimiter">// </span><span class="comment">Exercise 13: A (toy) linked list.
+</span>
+<span class="keyword">extern</span> <span class="keyword">crate</span> arena;
 
-extern crate arena;
+<span class="keyword">type</span> <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt; = &amp;'<span class="variable-name">a</span> <span class="type">arena::TypedArena</span>&lt;<span class="type">X</span>&gt;;
 
-type A&lt;'a, X&gt; = &amp;'a arena::TypedArena&lt;X&gt;;
-
-pub struct HsNode&lt;'a, X:'a&gt; {
-    arena: A&lt;'a, HeavyStack&lt;'a, X&gt;&gt;,
-    value: X,
-    next: &amp;'a HeavyStack&lt;'a, X&gt;,
+<span class="keyword">pub</span> <span class="keyword">struct</span> <span class="type">HsNode</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
+    <span class="variable-name">arena</span>: <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;&gt;,
+    <span class="variable-name">value</span>: <span class="type">X</span>,
+    <span class="variable-name">next</span>: &amp;'<span class="variable-name">a</span> <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;,
 }
 
-pub struct HsLeaf&lt;'a, X:'a&gt; {
-    arena: A&lt;'a, HeavyStack&lt;'a, X&gt;&gt;
+<span class="keyword">pub</span> <span class="keyword">struct</span> <span class="type">HsLeaf</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
+    <span class="variable-name">arena</span>: <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;&gt;
 }
 
-pub enum HeavyStack&lt;'a, X:'a&gt; {
-    HsCons(HsNode&lt;'a,X&gt;),
-    HsNull(HsLeaf&lt;'a,X&gt;),
+<span class="keyword">pub</span> <span class="keyword">enum</span> <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
+    <span class="type">HsCons</span>(<span class="type">HsNode</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
+    <span class="type">HsNull</span>(<span class="type">HsLeaf</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
 }
 
-trait StackMaker&lt;'a,X&gt; {
-    fn make_null(&amp;'a self) -&gt; HS&lt;X&gt;;
-    fn make_cons(&amp;'a self, h: X, t: HS&lt;'a, X&gt;) -&gt; HS&lt;X&gt;;
+<span class="keyword">trait</span> <span class="type">StackMaker</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+    <span class="keyword">fn</span> <span class="function-name">make_null</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt;;
+    <span class="keyword">fn</span> <span class="function-name">make_cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">h</span>: <span class="type">X</span>, <span class="variable-name">t</span>: <span class="type">HS</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt;;
 }
 
-impl&lt;'a,X&gt; StackMaker&lt;'a,X&gt; for arena::TypedArena&lt;HeavyStack&lt;'a,X&gt;&gt; {
-    fn make_null(&amp;'a self) -&gt; HS&lt;X&gt; {
-        self.alloc(HsNull(HsLeaf{ arena: self }))
+<span class="keyword">impl</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; <span class="type">StackMaker</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; <span class="keyword">for</span> <span class="type">arena::TypedArena</span>&lt;<span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;&gt; {
+    <span class="keyword">fn</span> <span class="function-name">make_null</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt; {
+        <span class="keyword">self</span>.alloc(<span class="type">HsNull</span>(<span class="type">HsLeaf</span>{ <span class="variable-name">arena</span>: <span class="keyword">self</span> }))
     }
-    fn make_cons(&amp;'a self, x: X, n: HS&lt;'a,X&gt;) -&gt; HS&lt;X&gt; {
-        self.alloc(HsCons(HsNode { arena: self, value: x, next: n }))
+    <span class="keyword">fn</span> <span class="function-name">make_cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">x</span>: <span class="type">X</span>, <span class="variable-name">n</span>: <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt; {
+        <span class="keyword">self</span>.alloc(<span class="type">HsCons</span>(<span class="type">HsNode</span> { <span class="variable-name">arena</span>: <span class="keyword">self</span>, <span class="variable-name">value</span>: x, <span class="variable-name">next</span>: n }))
     }
 }
 
 
-pub type HSV&lt;'a,X&gt; = HeavyStack&lt;'a, X&gt;;
-pub type HA&lt;'a,X&gt; = A&lt;'a, HSV&lt;'a,X&gt;&gt;;
-pub type HS&lt;'a,X&gt; = &amp;'a HSV&lt;'a,X&gt;;
+<span class="keyword">pub</span> <span class="keyword">type</span> <span class="type">HSV</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; = <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt;;
+<span class="keyword">pub</span> <span class="keyword">type</span> <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; = <span class="type">A</span>&lt;'<span class="variable-name">a</span>, <span class="type">HSV</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;&gt;;
+<span class="keyword">pub</span> <span class="keyword">type</span> <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; = &amp;'<span class="variable-name">a</span> <span class="type">HSV</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;;
 
-impl&lt;'a, X&gt; HeavyStack&lt;'a,X&gt; {
-    pub fn is_empty(&amp;self) -&gt; bool {
-        match *self {
-            HsCons(_) =&gt; false,
-            HsNull(_) =&gt; true,
+<span class="keyword">impl</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt; <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">is_empty</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">bool</span> {
+        <span class="keyword">match</span> *<span class="keyword">self</span> {
+            <span class="type">HsCons</span>(_) =&gt; <span class="keyword">false</span>,
+            <span class="type">HsNull</span>(_) =&gt; <span class="keyword">true</span>,
         }
     }
 
-    pub fn arena(&amp;self) -&gt; HA&lt;'a,X&gt; {
-        match *self {
-            HsCons(ref node) =&gt; node.arena,
-            HsNull(ref leaf) =&gt; leaf.arena,
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">arena</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+        <span class="keyword">match</span> *<span class="keyword">self</span> {
+            <span class="type">HsCons</span>(<span class="keyword">ref</span> node) =&gt; node.arena,
+            <span class="type">HsNull</span>(<span class="keyword">ref</span> leaf) =&gt; leaf.arena,
         }
     }
 
-    pub fn empty(arena: HA&lt;'a,X&gt;) -&gt; HS&lt;'a,X&gt; {
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">empty</span>(<span class="variable-name">arena</span>: <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
         arena.make_null()
     }
 
-    pub fn cons(&amp;'a self, x: X) -&gt; HS&lt;'a,X&gt; {
-        self.arena().make_cons(x, self)
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">x</span>: <span class="type">X</span>) -&gt; <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
+        <span class="keyword">self</span>.arena().make_cons(x, <span class="keyword">self</span>)
     }
 
-    pub fn tail(&amp;'a self) -&gt; Option&lt;HS&lt;X&gt;&gt; {
-        match self {
-            &amp;HsNull(_) =&gt; None,
-            &amp;HsCons(ref n) =&gt; Some(n.next),
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">tail</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">Option</span>&lt;<span class="type">HS</span>&lt;<span class="type">X</span>&gt;&gt; {
+        <span class="keyword">match</span> <span class="keyword">self</span> {
+            &amp;<span class="type">HsNull</span>(_) =&gt; <span class="type">None</span>,
+            &amp;<span class="type">HsCons</span>(<span class="keyword">ref</span> n) =&gt; <span class="type">Some</span>(n.next),
         }
     }
 
-    pub fn head(&amp;'a self) -&gt; Option&lt;X&gt; {
-        match self {
-            &amp;HsNull(_) =&gt; None,
-            &amp;HsCons(n) =&gt; Some(n.value),
+    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">head</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">Option</span>&lt;<span class="type">X</span>&gt; {
+        <span class="keyword">match</span> <span class="keyword">self</span> {
+            &amp;<span class="type">HsNull</span>(_) =&gt; <span class="type">None</span>,
+            &amp;<span class="type">HsCons</span>(n) =&gt; <span class="type">Some</span>(n.value),
         }
     }
 }
 
-pub fn main() {
-    let r = arena::TypedArena::&lt;HSV&lt;int&gt;&gt;::new();
-    let r1 = &amp;r;
-    let s0a = HeavyStack::empty(r1);            // ()
-    assert!(s0a.is_empty());
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> r = <span class="type">arena::TypedArena::</span>&lt;<span class="type">HSV</span>&lt;<span class="type">int</span>&gt;&gt;::new();
+    <span class="keyword">let</span> r1 = &amp;r;
+    <span class="keyword">let</span> s0a = <span class="type">HeavyStack::</span>empty(r1);            <span class="comment-delimiter">// </span><span class="comment">()
+</span>    <span class="preprocessor">assert!</span>(s0a.is_empty());
 
-    let s1b = s0a.cons(1);       // (1)
-    assert!(s1b.head().unwrap() == 1);
-    println!(&quot;s1b.head: {}&quot;, s1b.head());
+    <span class="keyword">let</span> s1b = s0a.cons(1);       <span class="comment-delimiter">// </span><span class="comment">(1)
+</span>    <span class="preprocessor">assert!</span>(s1b.head().unwrap() == 1);
+    <span class="preprocessor">println!</span>(<span class="string">&quot;s1b.head: {}&quot;</span>, s1b.head());
 }
 
-// EXERCISE: The code does not compile. There is something
-// fundamentally wrong with the &quot;desired&quot; API above. Come
-// up with a fix.
-//
-// HINT: Review first exercise from ex10.
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: The code does not compile. There is something
+</span><span class="comment-delimiter">// </span><span class="comment">fundamentally wrong with the &quot;desired&quot; API above. Come
+</span><span class="comment-delimiter">// </span><span class="comment">up with a fix.
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">HINT: Review first exercise from ex10.
+</span>
 
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Add an additional `head_and_tail` method that follows
+</span><span class="comment-delimiter">// </span><span class="comment">through on the original intent of `fn head`.
+</span>
 
-// EXERCISE: Add an additional `head_and_tail` method that follows
-// through on the original intent of `fn head`.
-
-
-// EXERCISE: Inspect the size_of the HeavyStack&lt;int&gt; type.  (See end
-// of ex7.rs)
-//
-// Can you explain where every byte comes from?
-//
-// Can you make an alternative API what is more size-efficient?
-</pre>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Inspect the size_of the HeavyStack&lt;int&gt; type.  (See end
+</span><span class="comment-delimiter">// </span><span class="comment">of ex7.rs)
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">Can you explain where every byte comes from?
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">Can you make an alternative API what is more size-efficient?
+</span></pre>
 
  </body>
 </html>

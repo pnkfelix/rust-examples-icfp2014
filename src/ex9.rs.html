@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,60 +125,60 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Example 9: Vec, slices (and some fun with literals)
-
-pub fn main() {
-    let mut v = Vec::new();
-    //          ^~~~~~~~ `Vec` is a generic dynamically growable vector.
-    //                   Such an ubiquitous library type, it is
-    //                   included in standard prelude.
-
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 9: Vec, slices (and some fun with literals)
+</span>
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="keyword">let</span> <span class="keyword">mut</span> v = <span class="type">Vec::</span>new();
+    <span class="comment-delimiter">//          </span><span class="comment">^~~~~~~~ `Vec` is a generic dynamically growable vector.
+</span>    <span class="comment-delimiter">//                   </span><span class="comment">Such an ubiquitous library type, it is
+</span>    <span class="comment-delimiter">//                   </span><span class="comment">included in standard prelude.
+</span>
     v.push(1_u64);
-    //      ^~~~ Note: I don't *have* to have this type specifier right now;
-    //           They are usually inferred.  (I have put it in to ease an
-    //           exercise below.)
-
-    println!(&quot;first call&quot;);
+    <span class="comment-delimiter">//      </span><span class="comment">^~~~ Note: I don't *have* to have this type specifier right now;
+</span>    <span class="comment-delimiter">//           </span><span class="comment">They are usually inferred.  (I have put it in to ease an
+</span>    <span class="comment-delimiter">//           </span><span class="comment">exercise below.)
+</span>
+    <span class="preprocessor">println!</span>(<span class="string">&quot;first call&quot;</span>);
     print_contents(&amp;v);
 
-    //       In general you can put underscores anywhere in a numeric literal
-    //       which is super useful for things like this:
-    v.push(0xbadc_0deb_ebad);
+    <span class="comment-delimiter">//       </span><span class="comment">In general you can put underscores anywhere in a numeric literal
+</span>    <span class="comment-delimiter">//       </span><span class="comment">which is super useful for things like this:
+</span>    v.push(0xbadc_0deb_ebad);
 
-    //       or this:
-    v.push(0b1111_0111_0011_0001_0000);
+    <span class="comment-delimiter">//       </span><span class="comment">or this:
+</span>    v.push(0b1111_0111_0011_0001_0000);
 
-    println!(&quot;second call&quot;);
+    <span class="preprocessor">println!</span>(<span class="string">&quot;second call&quot;</span>);
     print_contents(&amp;v);
 
     fourth_exercise();
 }
 
-fn print_contents(v: &amp;Vec&lt;u64&gt;) {
-    //               ^~~~~~~~~ see first exercise below
-    for i in 0..v.len() {
-        let elem = &amp;v[i];
-        println!(&quot;v[{}]: {:16x}&quot;, i, elem);
-        //                           ^~~~ XXX (see third exercise below)
-    }
+<span class="keyword">fn</span> <span class="function-name">print_contents</span>(<span class="variable-name">v</span>: &amp;<span class="type">Vec</span>&lt;<span class="type">u64</span>&gt;) {
+    <span class="comment-delimiter">//               </span><span class="comment">^~~~~~~~~ see first exercise below
+</span>    <span class="keyword">for</span> i <span class="keyword">in</span> 0..v.len() {
+        <span class="keyword">let</span> elem = &amp;v[i];
+        <span class="preprocessor">println!</span>(<span class="string">&quot;v[{}]: {:16x}&quot;</span>, i, elem);
+        <span class="comment-delimiter">//                           </span><span class="comment">^~~~ XXX (see third exercise below)
+</span>    }
 }
 
-// EXERCISE 1: Try removing the `&amp;` from `&amp;Vec&lt;u64&gt;` in the signature of `print_contents`
-// and from the call sites.  What happens?
-
-// EXERCISE 2: Try generalizing `print_contents` so that it takes &quot;any&quot; kind of `Vec&lt;X&gt;`.
-// (hint i. think about ex8.)
-// (hint ii. You may also need to use `use` to import something, similar to ex7::print_sizes.)
-//
-// NOTE: You do not need to complete this exercise to move on to the others below.
-
-// EXERCISE 4: Uncomment code in fourth_exercise below.  What goes wrong?  How could
-// you fix this?  (Hint: review ex7.)
-
-fn fourth_exercise() {
-    let _what_about_me = [0xfab_u64, 0xeba, 0xb0b];
-    // print_contents(_what_about_me);
-}
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 1: Try removing the `&amp;` from `&amp;Vec&lt;u64&gt;` in the signature of `print_contents`
+</span><span class="comment-delimiter">// </span><span class="comment">and from the call sites.  What happens?
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 2: Try generalizing `print_contents` so that it takes &quot;any&quot; kind of `Vec&lt;X&gt;`.
+</span><span class="comment-delimiter">// </span><span class="comment">(hint i. think about ex8.)
+</span><span class="comment-delimiter">// </span><span class="comment">(hint ii. You may also need to use `use` to import something, similar to ex7::print_sizes.)
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">NOTE: You do not need to complete this exercise to move on to the others below.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE 4: Uncomment code in fourth_exercise below.  What goes wrong?  How could
+</span><span class="comment-delimiter">// </span><span class="comment">you fix this?  (Hint: review ex7.)
+</span>
+<span class="keyword">fn</span> <span class="function-name">fourth_exercise</span>() {
+    <span class="keyword">let</span> _what_about_me = [0xfab_u64, 0xeba, 0xb0b];
+    <span class="comment-delimiter">// </span><span class="comment">print_contents(_what_about_me);
+</span>}
 </pre>
 
  </body>

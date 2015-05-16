@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,11 +125,11 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Example 1: Hello World, functions, types.
-
-// On with the show!
-
-fn say_hi(x:u8) -&gt; u8 {  /* A function signature */          /*
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 1: Hello World, functions, types.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">On with the show!
+</span>
+<span class="keyword">fn</span> <span class="function-name">say_hi</span>(<span class="variable-name">x</span>:<span class="type">u8</span>) -&gt; <span class="type">u8</span> {  <span class="comment-delimiter">/* </span><span class="comment">A function signature */</span>          <span class="comment-delimiter">/*</span><span class="comment">
 ^  ^     ^      ^  ^                                          *
 |  |     |      |  |                                          *
 |  |     |      |  ^~ 8-bit `u`nsigned integer                *
@@ -126,9 +142,9 @@ fn say_hi(x:u8) -&gt; u8 {  /* A function signature */          /*
 |                                                             *
 ^~ `fn` keyword marks start of a function item                *
                                                               *
-                                                              */
+                                                              */</span>
 
-    println!(&quot;Hello world from ex1&quot;); /* a statement */      /*
+    <span class="preprocessor">println!</span>(<span class="string">&quot;Hello world from ex1&quot;</span>); <span class="comment-delimiter">/* </span><span class="comment">a statement */</span>      <span class="comment-delimiter">/*</span><span class="comment">
     ^        ^                      ^~   terminated by `;`    *
     |        |                                                *
     |        ^~~~~~~~~~~~~~~~~~~~~~ string literal in &quot;&quot;      *
@@ -137,66 +153,66 @@ fn say_hi(x:u8) -&gt; u8 {  /* A function signature */          /*
              are (currently) marked with a `!` at the end     *
              of their name. Other macros include              *
              `assert!`, `assert_eq!`, `debug!`, `fail!`       *
-                                                              */
+                                                              */</span>
 
-    return x+1;                                              /*
+    <span class="keyword">return</span> x+1;                                              <span class="comment-delimiter">/*</span><span class="comment">
     ^~~~~~ Ahh; good old `return`                             *
-                                                              */
+                                                              */</span>
 }
 
-fn call_say_hi() -&gt; u8 {
+<span class="keyword">fn</span> <span class="function-name">call_say_hi</span>() -&gt; <span class="type">u8</span> {
 
-      say_hi(103)                                            /*
+      say_hi(103)                                            <span class="comment-delimiter">/*</span><span class="comment">
       ^~~~~~~~~~~^~~ a call expression...                     *
                  |                                            *
                  ^~ ... but, something's different here ...   *
                                                               *
   ^~~  ... hint: what's &quot;missing&quot; over here                   *
-                                                              */
+                                                              */</span>
 }
 
-fn call_say_hi_twice() -&gt; u8 { say_hi(103); say_hi(103) }
-//                Easy to write one-liners: ~~~~~~~~~~^
-
-pub fn main() {
-    // There are at least two &quot;interesting&quot; differences between the
-    // signatures of `main` and the `say_hi` family above.  Discuss.  :)
-
-    let x : u8 = call_say_hi();                              /*
+<span class="keyword">fn</span> <span class="function-name">call_say_hi_twice</span>() -&gt; <span class="type">u8</span> { say_hi(103); say_hi(103) }
+<span class="comment-delimiter">//                </span><span class="comment">Easy to write one-liners: ~~~~~~~~~~^
+</span>
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="comment-delimiter">// </span><span class="comment">There are at least two &quot;interesting&quot; differences between the
+</span>    <span class="comment-delimiter">// </span><span class="comment">signatures of `main` and the `say_hi` family above.  Discuss.  :)
+</span>
+    <span class="keyword">let</span> x : <span class="type">u8</span> = call_say_hi();                              <span class="comment-delimiter">/*</span><span class="comment">
     ^     ^~~~ a type annotation, just like in fn signatures  *
     |
     ^~~ local variable binding introduced by `let`.           *
-                                                              */
+                                                              */</span>
 
-    println!(&quot;`say_hi` returned {}&quot;, x);
-    //                          ^    ^~~ a second argument
-    //                          |
-    //                          ^~~~ a hole for the argument
+    <span class="preprocessor">println!</span>(<span class="string">&quot;`say_hi` returned {}&quot;</span>, x);
+    <span class="comment-delimiter">//                          </span><span class="comment">^    ^~~ a second argument
+</span>    <span class="comment-delimiter">//                          </span><span class="comment">|
+</span>    <span class="comment-delimiter">//                          </span><span class="comment">^~~~ a hole for the argument
+</span>
+    <span class="keyword">let</span> x = call_say_hi_twice();
 
-    let x = call_say_hi_twice();
-
-    println!(&quot;Repeat: it returned {}&quot;, x);
-    //                            ^~ (but unlike printf, Rust has a
-    //                                general-purpose default that
-    //                                types can also opt into.)
-
-    let c;
-    //   ^~ can leave off the initial value for later assignment.
-    //
-    //      Also letting the type be inferred; Rust allows this for
-    //      local variable declarations, but not for `fn` signatures.
-
-    c = x as char;
-    //    ^~~~~~~ casting syntax, read like `(char)x` in C/C++/Java.
-
-    println!(&quot;x (`{}`) as a char is `{}`&quot;, x, c);
+    <span class="preprocessor">println!</span>(<span class="string">&quot;Repeat: it returned {}&quot;</span>, x);
+    <span class="comment-delimiter">//                            </span><span class="comment">^~ (but unlike printf, Rust has a
+</span>    <span class="comment-delimiter">//                                </span><span class="comment">general-purpose default that
+</span>    <span class="comment-delimiter">//                                </span><span class="comment">types can also opt into.)
+</span>
+    <span class="keyword">let</span> c;
+    <span class="comment-delimiter">//   </span><span class="comment">^~ can leave off the initial value for later assignment.
+</span>    <span class="comment-delimiter">//</span><span class="comment">
+</span>    <span class="comment-delimiter">//      </span><span class="comment">Also letting the type be inferred; Rust allows this for
+</span>    <span class="comment-delimiter">//      </span><span class="comment">local variable declarations, but not for `fn` signatures.
+</span>
+    c = x <span class="keyword">as</span> <span class="type">char</span>;
+    <span class="comment-delimiter">//    </span><span class="comment">^~~~~~~ casting syntax, read like `(char)x` in C/C++/Java.
+</span>
+    <span class="preprocessor">println!</span>(<span class="string">&quot;x (`{}`) as a char is `{}`&quot;</span>, x, c);
 }
 
-// EXERCISE: Change all of the above fn's to take and return `u32`
-// instead of `u8`.
-//
-// What happens? Why? How can we address it?
-</pre>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: Change all of the above fn's to take and return `u32`
+</span><span class="comment-delimiter">// </span><span class="comment">instead of `u8`.
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">What happens? Why? How can we address it?
+</span></pre>
 
  </body>
 </html>

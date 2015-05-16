@@ -9,6 +9,22 @@
 body { font-size: 105%;  text-decoration: none; }
 span.default   { font-size: 105%;  text-decoration: none; }
 span.default a { font-size: 105%;  text-decoration: underline; }
+span.string   { color: #8b2252;  font-size: 105%;  text-decoration: none; }
+span.string a { color: #8b2252;  font-size: 105%;  text-decoration: underline; }
+span.preprocessor   { color: #483d8b;  font-size: 105%;  text-decoration: none; }
+span.preprocessor a { color: #483d8b;  font-size: 105%;  text-decoration: underline; }
+span.variable-name   { color: #a0522d;  font-size: 105%;  text-decoration: none; }
+span.variable-name a { color: #a0522d;  font-size: 105%;  text-decoration: underline; }
+span.type   { color: #228b22;  font-size: 105%;  text-decoration: none; }
+span.type a { color: #228b22;  font-size: 105%;  text-decoration: underline; }
+span.function-name   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.function-name a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.keyword   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.keyword a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment a { color: nil;  font-size: 105%;  text-decoration: underline; }
+span.comment-delimiter   { color: nil;  font-size: 105%;  text-decoration: none; }
+span.comment-delimiter a { color: nil;  font-size: 105%;  text-decoration: underline; }
  --></style>
 
     <script type="text/javascript"><!--
@@ -109,60 +125,60 @@ span.default a { font-size: 105%;  text-decoration: underline; }
   </head>
   <body onload="stripe('index'); return true;">
 
-<pre>// Example 8: closures, (bounded) polymorphism
-
-fn twice_i32&lt;F&gt;(x0: i32, f: &amp;F) -&gt; i32 where F: Fn(i32) -&gt; i32
-{   //                                             ^       ^
-    //    closure named `f`, which                 |       |
-    //  is a (generic type) `F` where              ^~~     |
-    //  `F` is an Fn (i.e. closure) that takes an `i32`    ^~~
-    //                                 ... and returns an `i32`.
-
-    let x1 = f(x0); // (work-around weakness in current borrow-checker)
-
+<pre><span class="comment-delimiter">// </span><span class="comment">Example 8: closures, (bounded) polymorphism
+</span>
+<span class="keyword">fn</span> <span class="function-name">twice_i32</span>&lt;<span class="type">F</span>&gt;(<span class="variable-name">x0</span>: <span class="type">i32</span>, <span class="variable-name">f</span>: &amp;<span class="type">F</span>) -&gt; <span class="type">i32</span> <span class="keyword">where</span> <span class="variable-name">F</span>: <span class="type">Fn</span>(<span class="type">i32</span>) -&gt; <span class="type">i32</span>
+{   <span class="comment-delimiter">//                                             </span><span class="comment">^       ^
+</span>    <span class="comment-delimiter">//    </span><span class="comment">closure named `f`, which                 |       |
+</span>    <span class="comment-delimiter">//  </span><span class="comment">is a (generic type) `F` where              ^~~     |
+</span>    <span class="comment-delimiter">//  </span><span class="comment">`F` is an Fn (i.e. closure) that takes an `i32`    ^~~
+</span>    <span class="comment-delimiter">//                                 </span><span class="comment">... and returns an `i32`.
+</span>
+    <span class="keyword">let</span> x1 = f(x0); <span class="comment-delimiter">// </span><span class="comment">(work-around weakness in current borrow-checker)
+</span>
     f(x1)
 }
 
-pub fn main() {
-    println!(&quot;twice_i32(0, add_1): {}&quot;, twice_i32(0, &amp;|y| y+1));
-    let w = 3;
-    println!(&quot;twice_i32(0, add_w): {}&quot;, twice_i32(0, &amp;|z| z+w));
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
+    <span class="preprocessor">println!</span>(<span class="string">&quot;twice_i32(0, add_1): {}&quot;</span>, twice_i32(0, &amp;|y| y+1));
+    <span class="keyword">let</span> w = 3;
+    <span class="preprocessor">println!</span>(<span class="string">&quot;twice_i32(0, add_w): {}&quot;</span>, twice_i32(0, &amp;|z| z+w));
 
-    println!(&quot;twice(0, add_1): {}&quot;, twice(0i32, &amp;|y| y+1));
+    <span class="preprocessor">println!</span>(<span class="string">&quot;twice(0, add_1): {}&quot;</span>, twice(0i32, &amp;|y| y+1));
 
-    // println!(&quot;twice_peano(0): {}&quot;, twice_peano(0i32)); // XXX (see exercise below)
-}
+    <span class="comment-delimiter">// </span><span class="comment">println!(&quot;twice_peano(0): {}&quot;, twice_peano(0i32)); // XXX (see exercise below)
+</span>}
 
-pub fn twice&lt;X, F&gt;(x: X, f: &amp;F) -&gt; X where F: Fn(X) -&gt; X {
-    let x1 = f(x);
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">twice</span>&lt;<span class="type">X</span>, <span class="type">F</span>&gt;(<span class="variable-name">x</span>: <span class="type">X</span>, <span class="variable-name">f</span>: &amp;<span class="type">F</span>) -&gt; <span class="type">X</span> <span class="keyword">where</span> <span class="variable-name">F</span>: <span class="type">Fn</span>(<span class="type">X</span>) -&gt; <span class="type">X</span> {
+    <span class="keyword">let</span> x1 = f(x);
     f(x1)
 }
 
-pub trait Peano {
-    fn succ(self) -&gt; Self;
+<span class="keyword">pub</span> <span class="keyword">trait</span> <span class="type">Peano</span> {
+    <span class="keyword">fn</span> <span class="function-name">succ</span>(<span class="keyword">self</span>) -&gt; <span class="type">Self</span>;
 }
 
-#[cfg(exercise_for_reader)]
-impl Peano for i32 {
+<span class="preprocessor">#[cfg(exercise_for_reader)]</span>
+<span class="keyword">impl</span> <span class="type">Peano</span> <span class="keyword">for</span> <span class="type">i32</span> {
 
 }
 
-pub fn twice_peano&lt;X:Peano&gt;(x: X) -&gt; X {
-    #![allow(unused_variables)]
-    unimplemented!()
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">twice_peano</span>&lt;<span class="variable-name">X</span>:<span class="type">Peano</span>&gt;(<span class="variable-name">x</span>: <span class="type">X</span>) -&gt; <span class="type">X</span> {
+    <span class="preprocessor">#![allow(unused_variables)]</span>
+    <span class="preprocessor">unimplemented!</span>()
 
-    // Hint: review ex4.rs
-}
+    <span class="comment-delimiter">// </span><span class="comment">Hint: review ex4.rs
+</span>}
 
-// EXERCISE: finish implementing Peano for `i32`; uncomment line marked XXX above.
-
-// EXERCISE: The first two calls to `twice_i32` in `main` illustrate
-// closures closed over their environment.  Try to make the classic
-// `make_adder` example of a higher-order function, i.e. defined
-// analogously to `make_adder ≡ λw.λz.z+w`
-//
-// Discuss.
-</pre>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: finish implementing Peano for `i32`; uncomment line marked XXX above.
+</span>
+<span class="comment-delimiter">// </span><span class="comment">EXERCISE: The first two calls to `twice_i32` in `main` illustrate
+</span><span class="comment-delimiter">// </span><span class="comment">closures closed over their environment.  Try to make the classic
+</span><span class="comment-delimiter">// </span><span class="comment">`make_adder` example of a higher-order function, i.e. defined
+</span><span class="comment-delimiter">// </span><span class="comment">analogously to `make_adder ≡ λw.λz.z+w`
+</span><span class="comment-delimiter">//</span><span class="comment">
+</span><span class="comment-delimiter">// </span><span class="comment">Discuss.
+</span></pre>
 
  </body>
 </html>
