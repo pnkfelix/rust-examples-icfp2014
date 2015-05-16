@@ -142,8 +142,8 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 }
 
 <span class="keyword">pub</span> <span class="keyword">enum</span> <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>, <span class="variable-name">X</span>:'<span class="variable-name">a</span>&gt; {
-    <span class="type">HsCons</span>(<span class="type">HsNode</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
-    <span class="type">HsNull</span>(<span class="type">HsLeaf</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
+    <span class="type">Cons</span>(<span class="type">HsNode</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
+    <span class="type">Null</span>(<span class="type">HsLeaf</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;),
 }
 
 <span class="keyword">trait</span> <span class="type">StackMaker</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
@@ -153,10 +153,10 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 
 <span class="keyword">impl</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; <span class="type">StackMaker</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; <span class="keyword">for</span> <span class="type">arena::TypedArena</span>&lt;<span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;&gt; {
     <span class="keyword">fn</span> <span class="function-name">make_null</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt; {
-        <span class="keyword">self</span>.alloc(<span class="type">HsNull</span>(<span class="type">HsLeaf</span>{ <span class="variable-name">arena</span>: <span class="keyword">self</span> }))
+        <span class="keyword">self</span>.alloc(<span class="type">HeavyStack::Null</span>(<span class="type">HsLeaf</span>{ <span class="variable-name">arena</span>: <span class="keyword">self</span> }))
     }
     <span class="keyword">fn</span> <span class="function-name">make_cons</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>, <span class="variable-name">x</span>: <span class="type">X</span>, <span class="variable-name">n</span>: <span class="type">HS</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt;) -&gt; <span class="type">HS</span>&lt;<span class="type">X</span>&gt; {
-        <span class="keyword">self</span>.alloc(<span class="type">HsCons</span>(<span class="type">HsNode</span> { <span class="variable-name">arena</span>: <span class="keyword">self</span>, <span class="variable-name">value</span>: x, <span class="variable-name">next</span>: n }))
+        <span class="keyword">self</span>.alloc(<span class="type">HeavyStack::Cons</span>(<span class="type">HsNode</span> { <span class="variable-name">arena</span>: <span class="keyword">self</span>, <span class="variable-name">value</span>: x, <span class="variable-name">next</span>: n }))
     }
 }
 
@@ -168,15 +168,15 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 <span class="keyword">impl</span>&lt;'<span class="variable-name">a</span>, <span class="type">X</span>&gt; <span class="type">HeavyStack</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
     <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">is_empty</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">bool</span> {
         <span class="keyword">match</span> *<span class="keyword">self</span> {
-            <span class="type">HsCons</span>(_) =&gt; <span class="keyword">false</span>,
-            <span class="type">HsNull</span>(_) =&gt; <span class="keyword">true</span>,
+            <span class="type">HeavyStack::Cons</span>(_) =&gt; <span class="keyword">false</span>,
+            <span class="type">HeavyStack::Null</span>(_) =&gt; <span class="keyword">true</span>,
         }
     }
 
     <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">arena</span>(&amp;<span class="keyword">self</span>) -&gt; <span class="type">HA</span>&lt;'<span class="variable-name">a</span>,<span class="type">X</span>&gt; {
         <span class="keyword">match</span> *<span class="keyword">self</span> {
-            <span class="type">HsCons</span>(<span class="keyword">ref</span> node) =&gt; node.arena,
-            <span class="type">HsNull</span>(<span class="keyword">ref</span> leaf) =&gt; leaf.arena,
+            <span class="type">HeavyStack::Cons</span>(<span class="keyword">ref</span> node) =&gt; node.arena,
+            <span class="type">HeavyStack::Null</span>(<span class="keyword">ref</span> leaf) =&gt; leaf.arena,
         }
     }
 
@@ -190,28 +190,28 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 
     <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">tail</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">Option</span>&lt;<span class="type">HS</span>&lt;<span class="type">X</span>&gt;&gt; {
         <span class="keyword">match</span> <span class="keyword">self</span> {
-            &amp;<span class="type">HsNull</span>(_) =&gt; <span class="type">None</span>,
-            &amp;<span class="type">HsCons</span>(<span class="keyword">ref</span> n) =&gt; <span class="type">Some</span>(n.next),
+            &amp;<span class="type">HeavyStack::Null</span>(_) =&gt; <span class="type">None</span>,
+            &amp;<span class="type">HeavyStack::Cons</span>(<span class="keyword">ref</span> n) =&gt; <span class="type">Some</span>(n.next),
         }
     }
 
     <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">head</span>(&amp;'<span class="variable-name">a</span> <span class="keyword">self</span>) -&gt; <span class="type">Option</span>&lt;<span class="type">X</span>&gt; {
         <span class="keyword">match</span> <span class="keyword">self</span> {
-            &amp;<span class="type">HsNull</span>(_) =&gt; <span class="type">None</span>,
-            &amp;<span class="type">HsCons</span>(n) =&gt; <span class="type">Some</span>(n.value),
+            &amp;<span class="type">HeavyStack::Null</span>(_) =&gt; <span class="type">None</span>,
+            &amp;<span class="type">HeavyStack::Cons</span>(n) =&gt; <span class="type">Some</span>(n.value),
         }
     }
 }
 
 <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
-    <span class="keyword">let</span> r = <span class="type">arena::TypedArena::</span>&lt;<span class="type">HSV</span>&lt;<span class="type">int</span>&gt;&gt;::new();
+    <span class="keyword">let</span> r = <span class="type">arena::TypedArena::</span>&lt;<span class="type">HSV</span>&lt;<span class="type">i32</span>&gt;&gt;::new();
     <span class="keyword">let</span> r1 = &amp;r;
     <span class="keyword">let</span> s0a = <span class="type">HeavyStack::</span>empty(r1);            <span class="comment-delimiter">// </span><span class="comment">()
 </span>    <span class="preprocessor">assert!</span>(s0a.is_empty());
 
     <span class="keyword">let</span> s1b = s0a.cons(1);       <span class="comment-delimiter">// </span><span class="comment">(1)
 </span>    <span class="preprocessor">assert!</span>(s1b.head().unwrap() == 1);
-    <span class="preprocessor">println!</span>(<span class="string">&quot;s1b.head: {}&quot;</span>, s1b.head());
+    <span class="preprocessor">println!</span>(<span class="string">&quot;s1b.head: {:?}&quot;</span>, s1b.head());
 }
 
 <span class="comment-delimiter">// </span><span class="comment">EXERCISE: The code does not compile. There is something

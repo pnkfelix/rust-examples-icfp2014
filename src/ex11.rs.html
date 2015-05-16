@@ -148,18 +148,20 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function-name">main</span>() {
     <span class="keyword">let</span> parent = <span class="type">Parent</span>;
 
-    <span class="keyword">let</span> requests : [<span class="type">Request</span>&lt;<span class="type">String</span>&gt;, ..3] = [<span class="type">GoSwimming</span>, <span class="type">LookAtStars</span>, <span class="type">EatLunch</span>];
+    <span class="keyword">let</span> requests : [<span class="type">Request</span>&lt;<span class="type">String</span>&gt;; 3] = [<span class="type">Request::GoSwimming</span>,
+                                           <span class="type">Request::LookAtStars</span>,
+                                           <span class="type">Request::EatLunch</span>];
     <span class="keyword">for</span> request <span class="keyword">in</span> requests.iter() {
         <span class="keyword">match</span> parent.can_i(request) {
 
-            <span class="type">Yes</span>(_) =&gt; {
+            <span class="type">Answer::Yes</span>(_) =&gt; {
                 <span class="preprocessor">println!</span>(<span class="string">&quot;Hooray!&quot;</span>);
                 <span class="keyword">return</span>;
             }
-            <span class="type">No</span>(why) =&gt; {
-                <span class="preprocessor">println!</span>(<span class="string">&quot;I do not believe you when you say {:s}!&quot;</span>, why);
+            <span class="type">Answer::No</span>(why) =&gt; {
+                <span class="preprocessor">println!</span>(<span class="string">&quot;I do not believe you when you say {}!&quot;</span>, why);
             }
-            <span class="type">Maybe</span> =&gt; {
+            <span class="type">Answer::Maybe</span> =&gt; {
                 <span class="preprocessor">println!</span>(<span class="string">&quot;Well, how about ...&quot;</span>);
             }
         }
@@ -167,7 +169,7 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 }
 
 <span class="keyword">impl</span>&lt;<span class="type">X</span>&gt; <span class="type">Answer</span>&lt;<span class="type">X</span>&gt; {
-    <span class="keyword">fn</span> <span class="function-name">map</span>&lt;<span class="type">Y</span>&gt;(<span class="keyword">self</span>, <span class="variable-name">f</span>: |<span class="type">X</span>| -&gt; <span class="type">Y</span>) -&gt; <span class="type">Answer</span>&lt;<span class="type">Y</span>&gt; {
+    <span class="keyword">fn</span> <span class="function-name">map</span>&lt;<span class="type">Y</span>, <span class="type">F</span>&gt;(<span class="keyword">self</span>, <span class="variable-name">f</span>: <span class="type">F</span>) -&gt; <span class="type">Answer</span>&lt;<span class="type">Y</span>&gt; <span class="keyword">where</span> <span class="variable-name">F</span>: <span class="type">Fn</span>(<span class="type">X</span>) -&gt; <span class="type">Y</span> {
         <span class="preprocessor">unimplemented!</span>(); <span class="comment-delimiter">// </span><span class="comment">XXX see exercise 2 below.
 </span>    }
 }
@@ -175,15 +177,15 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 <span class="keyword">impl</span> <span class="type">Parent</span> {
     <span class="keyword">fn</span> <span class="function-name">can_i</span>&lt;<span class="type">X</span>&gt;(&amp;<span class="keyword">self</span>, <span class="variable-name">r</span>: <span class="type">Request</span>&lt;<span class="type">X</span>&gt;) -&gt; <span class="type">Answer</span>&lt;<span class="type">String</span>&gt; {
         <span class="keyword">let</span> answer = <span class="keyword">match</span> r {
-            <span class="type">LookAtStars</span> =&gt; <span class="type">Maybe</span>,
+            <span class="type">Request::LookAtStars</span> =&gt; <span class="type">Answer::Maybe</span>,
 
-            <span class="type">GoSwimming</span> |
-            <span class="type">PlayOutsideWith</span>(_) =&gt; <span class="type">No</span>(<span class="string">&quot;we live in on Mars&quot;</span>),
+            <span class="type">Request::GoSwimming</span> |
+            <span class="type">Request::PlayOutsideWith</span>(_) =&gt; <span class="type">Answer::No</span>(<span class="string">&quot;we live in on Mars&quot;</span>),
 
-            <span class="type">EatLunch</span> =&gt; <span class="type">Yes</span>(<span class="string">&quot;it is close to noon&quot;</span>),
+            <span class="type">Request::EatLunch</span> =&gt; <span class="type">Answer::Yes</span>(<span class="string">&quot;it is close to noon&quot;</span>),
         };
 
-        answer.map(|string_literal| <span class="type">String::</span>from_str(string_literal))
+        answer.map(|string_literal| string_literal.to_string())
     }
 }
 

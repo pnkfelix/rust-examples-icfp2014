@@ -127,11 +127,11 @@ span.comment-delimiter a { color: #465a61;  font-style: italic;  font-weight: 50
 
 <pre><span class="comment-delimiter">// </span><span class="comment">Example 8: closures, (bounded) polymorphism
 </span>
-<span class="keyword">fn</span> <span class="function-name">twice_i32</span>&lt;<span class="type">F</span>&gt;(<span class="variable-name">x0</span>: <span class="type">i32</span>, <span class="variable-name">f</span>: &amp;<span class="type">F</span>) -&gt; <span class="type">i32</span> <span class="keyword">where</span> <span class="variable-name">F</span>: <span class="type">Fn</span>(<span class="type">i32</span>) -&gt; <span class="type">i3</span><span class="type">2</span>
+<span class="keyword">fn</span> <span class="function-name">twice_i32</span>&lt;<span class="type">F</span>&gt;(<span class="variable-name">x0</span>: <span class="type">i32</span>, <span class="variable-name">f</span>: &amp;<span class="type">F</span>) -&gt; <span class="type">i32</span> <span class="keyword">where</span> <span class="variable-name">F</span>: <span class="type">Fn</span>(<span class="type">i32</span>) -&gt; <span class="type">i32</span>
 {   <span class="comment-delimiter">//                                             </span><span class="comment">^       ^
 </span>    <span class="comment-delimiter">//    </span><span class="comment">closure named `f`, which                 |       |
-</span>    <span class="comment-delimiter">//  </span><span class="comment">is a (generic type) `F</span><span class="comment">`</span><span class="comment"> where              ^~~     |
-</span>    <span class="comment-delimiter">//  </span><span class="comment">`F` is an Fn (i.e. closure) that takes an `i32</span><span class="comment">`</span><span class="comment">    ^~</span><span class="comment">~</span><span class="comment">
+</span>    <span class="comment-delimiter">//  </span><span class="comment">is a (generic type) `F` where              ^~~     |
+</span>    <span class="comment-delimiter">//  </span><span class="comment">`F` is an Fn (i.e. closure) that takes an `i32`    ^~~
 </span>    <span class="comment-delimiter">//                                 </span><span class="comment">... and returns an `i32`.
 </span>
     <span class="keyword">let</span> x1 = f(x0); <span class="comment-delimiter">// </span><span class="comment">(work-around weakness in current borrow-checker)
